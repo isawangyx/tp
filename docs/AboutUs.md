@@ -16,45 +16,47 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jaylontan.png" width="200px">
 
 [[github](https://github.com/jaylontan)]
+[[portfolio](team/jaylontan.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jane Doe
+### Lu Bolin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lubolin.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lubolin)]
+[[portfolio](team/lubolin.md)]
+
+- Role: Team Lead
+- Responsibilities: UI
+
+### Patrick Thomas
+
+<img src="images/pastchum.png" width="200px">
+
+[[github](http://github.com/pastchum)]
+[[portfolio](team/patrickthomas.md)]
+
+- Role: Developer
+- Responsibilities: UI/UX
+
+### Benjamin Koh
+
+<img src="images/ben926.png" width="200px">
+
+[[github](http://github.com/ben926)]
+[[portfolio](team/benjaminkoh.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Overall project coordination
 
-### Johnny Doe
+### Wang Yanxiang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/isawangyx.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/isawangyx)]
+[[portfolio](team/wangyanxiang.md)]
 
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Role: Code Quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards

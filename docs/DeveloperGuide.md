@@ -274,29 +274,51 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* service staff of F&B stores that require prior bookings via customer phone calls.
+* has a need to efficiently manage customer bookings, including status, timing, contact details, and past records.
+* prefers an easy-to-use system for quick searching and retrieval of booking details.
+* benefits from personalized service features for recognizing and managing regular customers.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Provides a centralized system for managing customer bookings, reducing the time spent searching for reservations, and improving efficiency. Enables personalized service by tracking visit history and preferences while offering quick filtering, notifications, and daily summaries.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​         | I want to …​                                                  | So that I can…​                                             |
+|----------|----------------|---------------------------------------------------------------|-------------------------------------------------------------|
+| `* * *`  | service staff  | add a new booking with customer details                      | keep track of upcoming reservations                         |
+| `* * *`  | service staff  | delete a booking                                            | remove cancellations or incorrect entries                  |
+| `* * *`  | service staff  | view a list of all upcoming bookings                        | quickly see my schedule                                    |
+| `* * *`  | service staff  | search for a booking using a customer’s name or phone number | quickly find their reservation details                     |
+| `* * *`  | service staff  | see the number of bookings for each day                     | know how busy it will be                                   |
+| `* * *`  | service staff  | sort bookings by date or time                               | find what I need quickly                                  |
+| `* * *`  | service staff  | automatically set reminders for upcoming bookings          | avoid forgetting customer reservations                     |
+| `* * *`  | service staff  | view a customer’s past booking history                     | provide a more personalized experience                     |
+| `* * *`  | service staff  | save a new customer’s contact information                  | quickly find their details for future bookings             |
+| `* * *`  | service staff  | edit a customer’s contact details                          | update incorrect or outdated information                   |
+| `* * *`  | service staff  | delete customer contact details                            | maintain an updated list                                  |
+| `* * *`  | service staff  | store data offline                                         | keep all information for future use and tracking           |
+| `* *`    | service staff  | edit an existing booking                                  | update details when a customer changes their reservation   |
+| `* *`    | service staff  | filter bookings by date                                   | see only the relevant reservations                        |
+| `* *`    | service staff  | delete all bookings                                      | clear unnecessary backlogs                                |
+| `* *`    | service staff  | view booking trends (e.g., peak hours, popular days)     | prepare for busy periods                                  |
+| `* *`    | service staff  | receive a daily summary of upcoming bookings             | prepare for the day                                       |
+| `* *`    | service staff  | add bookings using a simple form                        | quickly enter customer details                           |
+| `* *`    | service staff  | view a summary of today’s bookings on the homepage      | see important details at a glance                        |
+| `* *`    | service staff  | mark a booking as completed                             | keep track of which customers have visited               |
+| `* *`    | service staff  | receive notifications for same-day bookings             | prepare for upcoming visitors                           |
+| `* *`    | service staff  | add notes to a customer profile                         | remember preferences like seating choices, allergies, etc. |
+| `* *`    | service staff  | see the frequency of a customer’s visits                | recognize regular customers                             |
+| `* *`    | service staff  | tag VIP or frequent customers                          | provide them with special perks or greetings            |
+| `* *`    | service staff  | save member emails for follow-up emails                | send reservation reminders and encourage repeat visits  |
+| `* *`    | service staff  | flag customers with repeated no-shows                   | manage bookings more effectively                        |
+| `* *`    | service staff  | assign specific bookings to different team members     | coordinate who is handling each customer               |
+| `* *`    | service staff  | see an overview of all bookings for the week/month     | better manage the workload                             |
+| `* *`  | service staff  | print a list of bookings                                  | have a hard copy for reference                            |
+| `*`      | service staff  | validate member emails                                 | ensure they are in the correct input format           |
+| `*`      | service staff  | quickly duplicate a previous booking                   | save time for repeat customers                         |
 
 ### Use cases
 
