@@ -46,6 +46,8 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 5. Type a command in the command box and press _Enter_ to execute it.  
 **Example:** Typing **`help`** and pressing _Enter_ will open the help window.
 
+<br>
+
 Some example commands you can try:
 
    * `plist` : Lists all customers.
@@ -109,6 +111,8 @@ Customers with the same phone number will be counted as **duplicate** customers.
 
 </box>
 
+<br>
+
 ### Adding a customer: `padd`
 
 Adds a customer to the customers list.
@@ -127,6 +131,7 @@ Examples:
 * `padd n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 m/true`
 * `padd n/Betsy Crowe t/seafoodAllergy e/betsycrowe@example.com a/Cotton Candy Land p/1234567`
 
+<br>
 
 ### Editing a customer: `pedit`
 
@@ -152,6 +157,7 @@ Examples:
 * `pedit 3 a/123 Sunset Way m/true t/friend t/vip`
 * `pedit 2 t/` (clears all tags)
 
+<br>
 
 ### Deleting a customer : `pdelete`
 Deletes the specified customer from customers list.
@@ -172,6 +178,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd customer in the customers list.
 * `find Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
 
+<br>
 
 ### Finding customers by name: `find`
 
@@ -195,6 +202,10 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
 
+`find alex david`
+![find alex david](images/findAlexDavidResult.png)
+
+<br>
 
 ### Listing all customers : `plist`
 
@@ -206,6 +217,8 @@ Format: `plist`
 ---
 ## Booking Commands
 A customer can have **zero, one or more** bookings. 
+
+<br>
 
 ### Adding a booking: `badd`
 
@@ -227,6 +240,7 @@ Examples:
 * `badd d/2025-04-03 2:30 PM p/98765432 x/5 r/Birthday Celebration`
 * `badd d/2025-06-10 7:00 PM p/91234567 x/2`
 
+<br>
 
 ### Editing a booking: `bedit`
 
@@ -252,6 +266,7 @@ Examples:
 * `bedit b/3 r/Changed to private room`
 * `bedit b/2 d/2025-05-12 12:00 PM`
 
+<br>
 
 ### Deleting a booking : `bdelete`
 
@@ -266,6 +281,7 @@ Format: `bdelete INDEX`
 Examples:
 * `bdelete 2` deletes the booking with ID 2.
 
+<br>
 
 ### Marking a booking status: `mark`
 
@@ -280,6 +296,7 @@ Format:
 Example:
 * `mark b/2 s/COMPLETED`
 
+<br>
 
 ### Filtering bookings: `filter`
 
@@ -306,6 +323,10 @@ Examples:
 * `filter p/98765432 d/2023-12-25` - Shows all bookings made by the customer with phone 98765432 on 25 December 2023
 * `filter p/98765432 s/UPCOMING` - Shows all upcoming bookings for the customer with phone 98765432
 
+`filter p/87438807 s/UPCOMING`
+![filter p/87438807 s/UPCOMING](images/filter_p87438807_sUPCOMING.png)
+
+<br>
 
 ### Listing bookings: `blist`
 
@@ -319,6 +340,7 @@ Examples:
 * `blist` → Lists only upcoming bookings.
 * `blist /all` → Lists all bookings.
 
+<br>
 
 ### Clearing completed and cancelled bookings: `clearbookings`
 
@@ -336,6 +358,7 @@ Format:
 Example:
 * `clearbookings`
 
+<br>
 
 ### Summarising bookings of the day: `today`
 
@@ -350,10 +373,15 @@ Format: `today`
 Example:
 * `today` → Lists all of today's bookings and customers who made those bookings.
 
+`today`
+![today](images/today.png)
+
 
 ---
 ## General Commands
 Listed below are the currently supported general commands.
+
+<br>
 
 ### Clearing all entries : `clearall`
 
@@ -367,15 +395,18 @@ Clears all customer entries and booking entries.
 
 Format: `clearall`
 
+<br>
 
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
 
+`help`
+![help message](images/helpMessage.png)
+
+<br>
 
 ### Exiting the program : `exit`
 
@@ -383,10 +414,14 @@ Exits the program.
 
 Format: `exit`
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 ### Saving the data
 
 KrustyKrab data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+<br>
 
 ### Editing the data file
 
@@ -399,6 +434,8 @@ If your changes to the data file makes its format invalid, KrustyKrab will disca
 Furthermore, certain edits can cause the KrustyKrab to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
+
+<br>
 
 ### Archiving data files `[coming in v2.0]`
 
