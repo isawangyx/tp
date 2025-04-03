@@ -4,9 +4,18 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+**KrustyKrab** is a lightweight and responsive desktop app for **restaurant staff** to quickly manage customer information and bookings.
+
+KrustyKrab allows you to:
+
+- Keep track of your customers' **contacts, membership status**, and **booking history**.
+- Easily view all upcoming bookings at a glance through a **clean list interface**.
+- **Add, edit, and cancel** bookings with just a few keystrokes.
+
+KrustyKrab is optimized for use via keyboard commands while still being visually clean and user-friendly.  
+If you type fast, you’ll get your booking tasks done quicker than with any mouse-heavy system.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -75,12 +84,13 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+---
 
-### Adding a person: `add`
+### Adding a person: `padd`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `padd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -88,8 +98,32 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `padd n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `padd n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+---
+
+### Adding a booking: `badd`
+
+Adds a booking to the address book.
+
+Format: `badd d/DATE_TIME p/PHONE x/PAX [r/REMARK]`
+
+<box type="tip" seamless>
+
+**Tip:**
+- The phone number must belong to an existing person.
+- Date and time must be in the format: `yyyy-MM-dd h:mm a`  
+  (e.g., `2025-04-03 2:30 PM`)
+- You can include an optional remark for the booking.
+
+</box>
+
+Examples:
+* `badd d/2025-04-03 2:30 PM p/98765432 x/5 r/Birthday Celebration`
+* `badd d/2025-06-10 7:00 PM p/91234567 x/2`
+
+---
 
 ### Listing all persons : `plist`
 
@@ -97,37 +131,87 @@ Shows a list of all persons in the address book.
 
 Format: `plist`
 
-### Editing a person : `edit`
+---
 
-Edits an existing person in the address book.
+### Listing all persons : `blist`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Shows a list of all bookings in the address book in order of upcoming date.
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+Format: `blist`
+
+---
+
+### Editing a person: `pedit`
+
+Edits the details of the person identified by the index number in the displayed person list.  
+Existing values will be overwritten by the input values.
+
+Format:  
+`pedit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [m/IS_MEMBER] [t/TAG]…​`
+
+<box type="tip" seamless>
+
+**Tips:**
+- `INDEX` refers to the position of the person in the last shown person list (must be a positive integer).
+- At least one field must be provided.
+- You **cannot edit the phone number** of a person.
+- `IS_MEMBER` should be `true` or `false`.
+- Editing tags will replace all existing tags with the new set. To clear all tags, use `t/` without any value.
+
+</box>
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `pedit 1 e/johndoe@example.com`
+* `pedit 3 a/123 Sunset Way m/true t/friend t/vip`
+* `pedit 2 t/` (clears all tags)
 
-### Locating persons by name: `find`
+---
 
-Finds persons whose names contain any of the given keywords.
+### Editing a booking: `bedit`
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Edits the details of the booking identified by the booking ID.  
+Existing values will be overwritten by the input values.
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Format:  
+`bedit b/BOOKING_ID [d/DATETIME] [x/PAX] [r/REMARK]`
+
+<box type="tip" seamless>
+
+**Tips:**
+- `BOOKING_ID` refers to the ID assigned to the booking (viewable using `blist`).
+- Date and time must follow the format: `yyyy-MM-dd h:mm a`  
+  (e.g., `2025-04-01 9:00 PM`)
+- You must provide at least one field to edit.
+- A warning will be shown if you edit the booking to a past date/time.
+
+</box>
 
 Examples:
+* `bedit b/1 d/2025-04-01 9:00 PM x/4 r/Anniversary`
+* `bedit b/3 r/Changed to private room`
+* `bedit b/2 d/2025-05-12 12:00 PM`
+
+---
+
+### Finding persons by name: `find`
+
+Finds all persons whose names contain any of the specified **full-word** keywords (case-insensitive), and displays them as a list with index numbers.
+
+Format:  
+`find KEYWORD [MORE_KEYWORDS]...`
+
+<box type="tip" seamless>
+
+**Tips:**
+- Keyword matching is **case-insensitive** but only matches **whole words**.
+- A keyword must match a full word in the person’s name (e.g., `alex` matches "Alex Tan" but not "Alexander").
+- You can enter multiple keywords separated by spaces to match more people.
+
+</box>
+
+Examples:
+* `find Alice` (matches "Alice Tan", but not "Malice")
+* `find alex` (matches "Alex Tan", not "Alexander")
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)

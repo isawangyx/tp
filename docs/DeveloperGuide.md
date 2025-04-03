@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# KrustyKrab Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -323,26 +323,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use Case: Add Booking Details**
+---
+
+## **Use Case: Add a Person**
 
 **MSS**
-1. User requests to add a new booking by providing phone number, date and time, pax, optional remark, and tags.
-2. System checks if the contact with the given phone number exists.
-    - If **yes**, proceed to step 3.
-    - If **no**, system shows an error message: *"No person with the given phone number exists."*
-      Use case ends.
-3. System validates the input values (e.g., phone number format, valid date/time, positive pax value).
-    - If **invalid values**, system shows an error message specifying the issue.
-    - Use case resumes at step 1.
-4. System saves the booking details under the existing contact.
-5. System displays a confirmation message: *"New booking added: [booking details]"*
+1. User requests to add a new person by entering their details (name, phone, email, address, and optional tags).
+2. System validates the input.
+3. System saves the new person to the address book.
+4. System displays a confirmation message:  
+   *"New contact added: [person details]"*
 
 Use case ends.
 
 **Extensions**
-- **2a.** Contact already has a booking for the same date and time.
-    - 2a1. System shows an error message: *"Booking already exists for this date and time."*
+- **1a.** Invalid input (e.g., empty name, bad email format).
+    - 1a1. System shows an error message: *"Invalid input: [reason]"*
+    - 1a2. Use case resumes at step 1.
+
+- **1b.** Person with the same phone number already exists.
+    - 1b1. System shows an error message: *"A person with this phone number already exists."*
+    - 1b2. Use case ends.
+
+---
+
+## **Use Case: Add a Booking**
+
+**MSS**
+1. User requests to add a new booking by providing phone number, date/time, pax, optional remark, and tags.
+2. System checks if a person with the given phone number exists.
+    - If **no**, system shows: *"No person with the given phone number exists."*  
+      Use case ends.
+    - If **yes**, continue to step 3.
+3. System validates the booking inputs.
+4. System saves the booking under the person’s record.
+5. System displays confirmation:  
+   *"New booking added: [booking details]"*
+
+Use case ends.
+
+**Extensions**
+- **2a.** Person not found.
+    - 2a1. System displays error.
     - 2a2. Use case ends.
+
+- **3a.** Invalid booking data (e.g., negative pax, wrong date format).
+    - 3a1. System shows relevant error message.
+    - 3a2. Use case resumes at step 1.
+
+- **4a.** A booking already exists for the same date/time.
+    - 4a1. System shows: *"A booking already exists for this date and time."*
+    - 4a2. Use case ends.
 
 ---
 
