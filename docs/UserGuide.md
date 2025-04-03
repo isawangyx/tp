@@ -16,8 +16,16 @@ KrustyKrab allows you to:
 
 KrustyKrab is optimized for use via keyboard commands while still being visually pleasing and user-friendly. If you type fast, you’ll get your booking tasks done quicker than with any mouse-based system.
 
-<!-- * Table of Contents -->
-{:toc}
+---
+## Table of Contents
+1. [Quick Start](#quick-start)
+2. [Command Overview](#command-overview)
+3. [Customer Commands](#customer-commands)
+4. [Booking Commands](#booking-commands)
+5. [General Commands](#general-commands)
+6. [FAQ](#faq)
+7. [Known Issues](#known-issues)
+8. [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
