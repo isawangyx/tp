@@ -8,18 +8,18 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FilterCommand;
+import seedu.address.logic.commands.FilterBookingsCommand;
 import seedu.address.model.booking.Status;
 import seedu.address.model.person.Phone;
 
-public class FilterCommandParserTest {
+public class FilterBookingsCommandParserTest {
 
-    private final FilterCommandParser parser = new FilterCommandParser();
+    private final FilterBookingsCommandParser parser = new FilterBookingsCommandParser();
 
     @Test
     public void parse_validPhoneOnly_success() throws Exception {
         String input = " p/91234567";
-        FilterCommand expected = new FilterCommand(new Phone("91234567"), null, null);
+        FilterBookingsCommand expected = new FilterBookingsCommand(new Phone("91234567"), null, null);
         assertParseSuccess(parser, input, expected);
     }
 
@@ -27,14 +27,14 @@ public class FilterCommandParserTest {
     public void parse_validDateOnly_success() throws Exception {
         String input = " d/2025-12-31";
         LocalDateTime expectedDate = LocalDateTime.of(2025, 12, 31, 0, 0);
-        FilterCommand expected = new FilterCommand(null, expectedDate, null);
+        FilterBookingsCommand expected = new FilterBookingsCommand(null, expectedDate, null);
         assertParseSuccess(parser, input, expected);
     }
 
     @Test
     public void parse_validStatusOnly_success() throws Exception {
         String input = " s/completed";
-        FilterCommand expected = new FilterCommand(null, null, Status.COMPLETED);
+        FilterBookingsCommand expected = new FilterBookingsCommand(null, null, Status.COMPLETED);
         assertParseSuccess(parser, input, expected);
     }
 
@@ -42,7 +42,8 @@ public class FilterCommandParserTest {
     public void parse_validAllFields_success() throws Exception {
         String input = " p/91234567 d/2025-12-31 s/UPCOMING";
         LocalDateTime expectedDate = LocalDateTime.of(2025, 12, 31, 0, 0);
-        FilterCommand expected = new FilterCommand(new Phone("91234567"), expectedDate, Status.UPCOMING);
+        FilterBookingsCommand expected = new FilterBookingsCommand(new Phone("91234567"),
+                expectedDate, Status.UPCOMING);
         assertParseSuccess(parser, input, expected);
     }
 
@@ -50,7 +51,7 @@ public class FilterCommandParserTest {
     public void parse_missingAllFields_failure() {
         String input = "";
         assertParseFailure(parser, input,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterBookingsCommand.MESSAGE_USAGE));
     }
 
     @Test
