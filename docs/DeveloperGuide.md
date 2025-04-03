@@ -582,10 +582,9 @@ Use case ends.
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned Enhancements**
 
-
-
-
-
+1. **Enhance Booking Conflict Detection**: Implement a feature to ensure that upcoming bookings are not overlapped with each other, considering factors like booking type, duration, and person availability. This will prevent double-booking and improve user experience by making sure only valid booking slots are available. 
+2. **Add Notification System for Upcoming Bookings**: Introduce a notification system to alert users of their upcoming bookings. This enhancement will include customizable notification preferences, allowing users to choose when they want to be reminded (e.g., 24 hours before, 1 hour before, etc.).
+3. **Improve Reporting Capabilities**: Expand the reporting features to allow users to generate detailed reports of booking history, including the number of bookings made, booking frequency, and utilization rates. This will help users track booking patterns and identify potential areas for optimization.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Instructions for manual testing**
@@ -604,14 +603,12 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
-
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -622,13 +619,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `plist` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
