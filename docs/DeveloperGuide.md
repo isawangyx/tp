@@ -159,6 +159,75 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Tracking Bookings
+
+#### Implementation to Track Bookings
+
+The `Booking` class is a class under the Model component. It is used to represent a booking made by a customer. The class contains the following fields:
+* `bookingId` - a unique identifier for the booking.
+* `bookingPerson` - the person who made the booking.
+* `bookingDateTime` - the date and time of the booking.
+* `bookingMadeDateTime` - the date and time at which the booking _was made_.
+* `status` - the status of the booking (e.g., Upcoming, Completed, Cancelled).
+* `pax` - the number of people for the booking.
+* `remark` - any remarks made by the customer.
+
+Patrons and bookings have a one-to-many relationship, where a patron can have multiple bookings. 
+As such:
+- The `Booking` class contains a reference to the `Person` class, which represents the patron who made the booking. 
+- Patrons have a `bookingIds` field that contains a list of booking IDs linked to the booking's `bookingId` field, which are unique identifiers for each booking made by the patron.
+
+Bookings are stored in the `UniqueBookingList` class, which is a list of unique bookings utilising a HashSet for quick retrieval of `Booking` Objects by `BookingId`, and it ensures that no two bookings with the same booking ID exist in the list.
+The `UniqueBookingList` class provides methods to add, delete, and search for bookings. It also provides methods to filter bookings by date and time, and to sort bookings by date and time, all separate from the list of persons represented by `UniquePersonsList`.
+
+#### Design considerations:
+
+**Aspect: Storing list of bookings:**
+
+* **Utilising HashSet for Bookings:** Faster Retrieval times.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
+
+**Aspect: Linking bookings to patron:**
+
+* **Utilising list of integers for Ids:** Easier to store in memory.
+    * Pros: `Person` class occupies less space in memory.
+            Easier to save to JSON file.
+    * Cons: More steps required to access bookings under a given patron.
+
+
+### Storage of Persons and Bookings
+
+#### Implementation of Storage
+
+The storage component is responsible for saving and loading the address book data and user preferences. It uses the Jackson library to convert Java objects to JSON format and vice versa. 
+The implementation of Storage is based off AddressBook-Level3, with the following changes:
+* The `AddressBookStorage` interface has been modified to include methods for saving and loading bookings.
+* The `JsonAddressBookStorage` class has been modified to include methods for saving and loading bookings.
+* The `JsonAdaptedBooking` class has been added to convert `Booking` objects to and from JSON format.
+* The `JsonAdaptedPerson` class has been modified to include a list of booking IDs for each person.
+* The `JsonSerializableAddressBook` class has been modified to include a list of bookings.
+
+Storage is updated at every change to the address book, and the `StorageManager` class is responsible for managing the storage of both the address book and user preferences. The `StorageManager` class implements the `Storage` interface and uses the `JsonAddressBookStorage` and `JsonUserPrefStorage` classes to read and write data.
+
+Given below is a class diagram of the `Storage` component:
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+
+#### Design considerations:
+
+**Aspect: Storing list of bookings:**
+
+* **New field for Array of Bookings:** Easier to understand and debug.
+    * Pros: JSON format is simple and intuitive.
+    * Cons: Requires inputs in fields to be correct.
+
+**Aspect: Linking bookings to patron:**
+
+* **Utilising list of integers for Ids:** Less space to store in the JSON file.
+    * Pros: Ensures every `Booking` object is tied to a `Person` object.
+    * Cons: Fails to load JSON file if incorrectly set up.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -254,8 +323,8 @@ _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
-
+The proposed data archiving feature is designed to allow users to archive old bookings, which can help in managing the address book more efficiently.
+_Implementation to be discussed for future revisions._
 
 --------------------------------------------------------------------------------------------------------------------
 
