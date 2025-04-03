@@ -4,9 +4,9 @@
 
 ## Welcome to the KrustyKrab
 
-_For all service staff folk that struggle with keeping track of who's coming to eat._
+_For all service staff folks who struggle with keeping track of who's coming to eat._
 
-This is a CLI-based booking tracker which helps in keeping track of booking details and customer information in a simple, efficient, and centralized system for quick and easy management.
+This is a **CLI-based bookings tracker** which helps in keeping track of booking details and customer information in a simple, efficient, and centralized system for quick and easy management.
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
@@ -16,7 +16,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 >
 > ~ Mr Krabs
 
-KrustyKrab provides service staff with a centralised platform to allow them to keep track of both customers and their bookings, with an easy command-based interface to allow staff to:
+KrustyKrab provides service staff with a centralised platform that allows them to keep track of both customers and their bookings, with an easy command-based interface to allow staff to:
 
 Customer Commands
 - Add customers
@@ -28,17 +28,20 @@ Customer Commands
 
 Booking Commands
 - Add bookings
+- Edit bookings
+- Delete bookings
 - Clear all completed/cancelled bookings
-- Filter bookings by phone number
+- Filter bookings by phone number/date/booking status
 - Mark bookings as completed/cancelled/upcoming
 - Display all bookings
 - Display all upcoming bookings
+- Summarise bookings of the day
 
 ## Getting started
 
 ### Download our Jar file
 
-The Jar file is currently not available. Please check back later for updates.
+You can find our Jar file under [Releases](https://github.com/AY2425S2-CS2103T-T08-2/tp/releases). Download the latest one and test it out!
 
 ### Forking the Repo
 
@@ -115,7 +118,7 @@ Would like everyone to know he created [Gyatword.com](https://gyatword.com)
 ### [Lu "Bloin" Bolin](https://github.com/LuBolin)
 
 **Team Lead**  
-Has been coding since 2 years old.
+Has been coding since 2 years old
 
 ### [Wang Yanxiang](https://github.com/isawangyx)
 

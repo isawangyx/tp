@@ -10,48 +10,60 @@
 
 KrustyKrab allows you to:
 
-- Keep track of your customers' **contacts, membership status**, and **booking history**.
-- Easily view all upcoming bookings at a glance through a **clean list interface**.
-- **Add, edit, and cancel** bookings with just a few keystrokes.
+- Keep track of your customers' **contacts** and **bookings**.
+- Easily view all upcoming bookings at a glance through our **bookings view**.
+- **Add, edit**, and **cancel** bookings with just a few keystrokes.
 
-KrustyKrab is optimized for use via keyboard commands while still being visually clean and user-friendly.  
-If you type fast, you’ll get your booking tasks done quicker than with any mouse-heavy system.
+KrustyKrab is optimized for use via keyboard commands while still being visually pleasing and user-friendly. If you type fast, you’ll get your booking tasks done quicker than with any mouse-based system.
 
 <!-- * Table of Contents -->
-<page-nav-print />
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
+1. Ensure you have Java `17` or above installed in your computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-T08-2/tp/releases).
+2. Download the latest `krustykrab.jar` file from [here](https://github.com/AY2425S2-CS2103T-T08-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for KrustyKrab.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   Example: `cd C:\Users\JasonLim\KrustyHomeFolder\` <br> 
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar krustykrab.jar` command to run the application.  
+**Example**: `cd C:\Users\JasonLim\KrustyHomeFolder\`<br><br>
+A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type a command in the command box and press _Enter_ to execute it.  
+**Example:** Typing **`help`** and pressing _Enter_ will open the help window.
 
-   * `list` : Lists all contacts.
+Some example commands you can try:
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
+   * `plist` : Lists all customers.
+   * `padd n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a customer named `John Doe` to the customer list.
+   * `badd d/2021-10-01 3:00 PM p/98765432 x/5` : Adds a booking to the customer with phone number 98765432.
    * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Command Overview
+
+<box type="tip" seamless>
+
+**Tip:** Refer to the [Command Summary](#command-summary) for a table containing the full list of commands.
+
+</box>
+
+The commands you can use in KrustyKrab are split into **3 different types**:
+
+- [Customer Commands](#customer-commands)
+- [Booking Commands](#booking-commands)
+- [General Commands](#general-commands)
+
+Let's walk you through some basics of the command format.
+
+Each command consists of a **command word**, and zero or more **parameters**.
 
 <box type="info" seamless>
 
@@ -61,10 +73,7 @@ If you type fast, you’ll get your booking tasks done quicker than with any mou
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/nutsAllergy` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -72,61 +81,48 @@ If you type fast, you’ll get your booking tasks done quicker than with any mou
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `plist`, `blist`, and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+<box type="warning" seamless>
 
-Shows a message explaning how to access the help page.
+**Caution:** If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-![help message](images/helpMessage.png)
+</box>
 
-Format: `help`
+--------------------------------------------------------------------------------------------------------------------
+## Customer Commands
+A customer has a **name, phone number, email, address, membership status** and optionally, **tags**.
 
----
+<box type="note" seamless>
 
-### Adding a person: `padd`
+**Note:** 
 
-Adds a person to the address book.
+Customers with the same phone number will be counted as **duplicate** customers.
 
-Format: `padd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+</box>
+
+### Adding a customer: `padd`
+
+Adds a customer to the customers list.
+
+Format: `padd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/IS_MEMBER] [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
-</box>
-
-Examples:
-* `padd n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `padd n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
----
-
-### Adding a booking: `badd`
-
-Adds a booking to the address book.
-
-Format: `badd d/DATE_TIME p/PHONE x/PAX [r/REMARK]`
-
-<box type="tip" seamless>
-
-**Tip:**
-- The phone number must belong to an existing person.
-- Date and time must be in the format: `yyyy-MM-dd h:mm a`  
-  (e.g., `2025-04-03 2:30 PM`)
-- You can include an optional remark for the booking.
+**Tips:**
+- A customer's default membership status is false unless you set it to true.
+- A customer can have any number of tags (including 0)
 
 </box>
 
 Examples:
-* `badd d/2025-04-03 2:30 PM p/98765432 x/5 r/Birthday Celebration`
-* `badd d/2025-06-10 7:00 PM p/91234567 x/2`
+* `padd n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 m/true`
+* `padd n/Betsy Crowe t/seafoodAllergy e/betsycrowe@example.com a/Cotton Candy Land p/1234567`
 
----
 
-### Editing a person: `pedit`
+### Editing a customer: `pedit`
 
-Edits the details of the person identified by the index number in the displayed person list.  
+Edits the details of the customer identified by the index number in the displayed customers list.  
 Existing values will be overwritten by the input values.
 
 Format:  
@@ -135,9 +131,9 @@ Format:
 <box type="tip" seamless>
 
 **Tips:**
-- `INDEX` refers to the position of the person in the **last shown person list** (must be a positive integer).
+- `INDEX` refers to the position of the customer in the **last shown customer list** (must be a positive integer).
 - At least one field must be provided.
-- You **cannot edit the phone number** of a person.
+- You **cannot edit the phone number** of a customer.
 - `IS_MEMBER` should be `true` or `false`.
 - Editing tags will replace all existing tags with the new set. To clear all tags, use `t/` without any value.
 
@@ -148,7 +144,81 @@ Examples:
 * `pedit 3 a/123 Sunset Way m/true t/friend t/vip`
 * `pedit 2 t/` (clears all tags)
 
+
+### Deleting a customer : `pdelete`
+Deletes the specified customer from customers list.
+
+Format: `pdelete INDEX`
+
+* Deletes the customer at the specified `INDEX`.
+* The index refers to the index number shown in the displayed customers list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="warning" seamless>
+
+**Caution**: Deleting a customer also deletes their associated bookings!
+
+</box>
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd customer in the customers list.
+* `find Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
+
+
+### Finding customers by name: `find`
+
+Finds all customers whose names contain any of the specified **full-word** keywords (case-insensitive), and displays them as a list with index numbers.
+
+Format:  
+`find KEYWORD [MORE_KEYWORDS]...`
+
+<box type="tip" seamless>
+
+**Tips:**
+- Keyword matching is **case-insensitive** but only matches **whole words**.
+- A keyword must match a full word in the customer’s name (e.g., `alex` matches "Alex Tan" but not "Alexander").
+- You can enter multiple keywords separated by spaces to match more people.
+
+</box>
+
+Examples:
+* `find Alice` (matches "Alice Tan", but not "Malice")
+* `find alex` (matches "Alex Tan", not "Alexander")
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`
+
+
+### Listing all customers : `plist`
+
+Shows a list of all customers in the customers list.
+
+Format: `plist`
+
+
 ---
+## Booking Commands
+A customer can have **zero, one or more** bookings. 
+
+### Adding a booking: `badd`
+
+Adds a booking to the bookings list.
+
+Format: `badd d/DATE_TIME p/PHONE x/PAX [r/REMARK]`
+
+<box type="tip" seamless>
+
+**Tip:**
+- The phone number must belong to an existing customer.
+- Date and time must be in the format: `yyyy-MM-dd h:mm a`  
+  (e.g., `2025-04-03 2:30 PM`)
+- You can include an optional remark for the booking.
+
+</box>
+
+Examples:
+* `badd d/2025-04-03 2:30 PM p/98765432 x/5 r/Birthday Celebration`
+* `badd d/2025-06-10 7:00 PM p/91234567 x/2`
+
 
 ### Editing a booking: `bedit`
 
@@ -174,27 +244,10 @@ Examples:
 * `bedit b/3 r/Changed to private room`
 * `bedit b/2 d/2025-05-12 12:00 PM`
 
----
-
-### Deleting a person : `pdelete`
-
-Deletes the specified person from the address book.
-
-Format: `pdelete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
----
 
 ### Deleting a booking : `bdelete`
 
-Deletes the specified booking from the address book.
+Deletes the specified booking from the bookings list.
 
 Format: `bdelete INDEX`
 
@@ -205,7 +258,6 @@ Format: `bdelete INDEX`
 Examples:
 * `bdelete 2` deletes the booking with ID 2.
 
----
 
 ### Marking a booking status: `mark`
 
@@ -220,32 +272,6 @@ Format:
 Example:
 * `mark b/2 s/COMPLETED`
 
----
-
-### Finding persons by name: `find`
-
-Finds all persons whose names contain any of the specified **full-word** keywords (case-insensitive), and displays them as a list with index numbers.
-
-Format:  
-`find KEYWORD [MORE_KEYWORDS]...`
-
-<box type="tip" seamless>
-
-**Tips:**
-- Keyword matching is **case-insensitive** but only matches **whole words**.
-- A keyword must match a full word in the person’s name (e.g., `alex` matches "Alex Tan" but not "Alexander").
-- You can enter multiple keywords separated by spaces to match more people.
-
-</box>
-
-Examples:
-* `find Alice` (matches "Alice Tan", but not "Malice")
-* `find alex` (matches "Alex Tan", not "Alexander")
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
----
 
 ### Filtering bookings: `filter`
 
@@ -258,7 +284,7 @@ Format:
 
 **Tips:**
 - At least one parameter must be provided
-- Phone number must match an existing person
+- Phone number must match an existing customer
 - Date must be in the format: `yyyy-MM-dd` (e.g., `2023-12-25`)
 - Status must be one of: `UPCOMING`, `COMPLETED`, or `CANCELLED`
 - You can combine parameters to filter bookings more precisely
@@ -266,25 +292,16 @@ Format:
 </box>
 
 Examples:
-* `filter p/98765432` - Shows all bookings made by the person with phone number 98765432
+* `filter p/98765432` - Shows all bookings made by the customer with phone number 98765432
 * `filter d/2023-12-25` - Shows all bookings on 25 December 2023
 * `filter s/COMPLETED` - Shows all bookings marked as completed
-* `filter p/98765432 d/2023-12-25` - Shows all bookings made by the person with phone 98765432 on 25 December 2023
-* `filter p/98765432 s/UPCOMING` - Shows all upcoming bookings for the person with phone 98765432
+* `filter p/98765432 d/2023-12-25` - Shows all bookings made by the customer with phone 98765432 on 25 December 2023
+* `filter p/98765432 s/UPCOMING` - Shows all upcoming bookings for the customer with phone 98765432
 
----
-
-### Listing all persons : `plist`
-
-Shows a list of all persons in the address book.
-
-Format: `plist`
-
----
 
 ### Listing bookings: `blist`
 
-Shows all bookings in the address book.
+Shows all bookings in the bookings list.
 
 Format:
 * `blist` : Lists upcoming bookings.
@@ -294,16 +311,6 @@ Examples:
 * `blist` → Lists only upcoming bookings.
 * `blist /all` → Lists all bookings.
 
----
-
-### Clearing all entries : `clearall`
-
-Clears all person entries and booking entries.
-**Warning: This action is irreversible.**
-
-Format: `clearall`
-
----
 
 ### Clearing completed and cancelled bookings: `clearbookings`
 
@@ -312,27 +319,55 @@ Clears all bookings marked as **Completed** or **Cancelled**.
 Format:  
 `clearbookings`
 
-* Upcoming bookings will **not** be cleared.
+<box type="note" seamless>
+
+**Note:** Upcoming bookings will **not** be cleared.
+
+</box>
 
 Example:
 * `clearbookings`
 
----
 
-### Today's bookings : `today`
+### Summarising bookings of the day: `today`
 
-Shows all bookings scheduled for today and the related persons who made those bookings.
+Shows all bookings scheduled for today and the customers who made those bookings.
 
 Format: `today`
 
 * Displays all bookings for the current date.
 * Also shows a summary count of upcoming, completed and cancelled bookings for today.
-* Shows the list of persons who have bookings today.
+* Shows the list of customers who have bookings today.
 
 Example:
-* `today` → Lists all of today's bookings and related persons.
+* `today` → Lists all of today's bookings and customers who made those bookings.
+
 
 ---
+## General Commands
+Listed below are the currently supported general commands.
+
+### Clearing all entries : `clearall`
+
+Clears all customer entries and booking entries.
+
+<box type="warning" seamless>
+
+**Warning:** All customers and bookings will be cleared. This action is irreversible!
+
+</box>
+
+Format: `clearall`
+
+
+### Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
+
 
 ### Exiting the program : `exit`
 
@@ -340,21 +375,21 @@ Exits the program.
 
 Format: `exit`
 
----
-
+--------------------------------------------------------------------------------------------------------------------
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+KrustyKrab data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+KrustyKrab data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, KrustyKrab will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the KrustyKrab to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -366,7 +401,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous KrustyKrab home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -380,15 +415,15 @@ _Details coming soon ..._
 
 Action                | Format, Examples
 ----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Person**        | `padd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/IS_MEMBER] [t/TAG]…​` <br> e.g., `padd n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend`
+**Add Customer**      | `padd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/IS_MEMBER] [t/TAG]…​` <br> e.g., `padd n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend`
 **Add Booking**       | `badd d/DATE_TIME p/PHONE x/PAX [r/REMARK]` <br> e.g., `badd d/2025-04-03 2:30 PM p/98765432 x/5 r/Birthday Celebration`
-**List Persons**      | `plist`
+**List Customers**    | `plist`
 **List Bookings**     | `blist`<br> `blist /all`
-**Edit Person**       | `pedit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [m/IS_MEMBER] [t/TAG]…​` <br> e.g.,`pedit 3 a/123 Sunset Way m/true t/friend t/vip`
+**Edit Customer**     | `pedit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [m/IS_MEMBER] [t/TAG]…​` <br> e.g.,`pedit 3 a/123 Sunset Way m/true t/friend t/vip`
 **Edit Booking**      | `bedit b/BOOKING_ID [d/DATETIME] [x/PAX] [r/REMARK]` <br> e.g., `bedit b/1 d/2025-04-01 9:00 PM x/4 r/Anniversary`
-**Delete Person**     | `pdelete INDEX` <br> e.g., `pdelete 3`
+**Delete Customer**   | `pdelete INDEX` <br> e.g., `pdelete 3`
 **Delete Booking**    | `bdelete INDEX` <br> e.g., `bdelete 2`
-**Find Persons**      | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find James Jake`
+**Find Customers**    | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find James Jake`
 **Filter Bookings**   | `filter [p/PHONE_NUMBER] [d/DATE] [s/STATUS]` <br> e.g., `filter p/98765432`, `filter d/2023-12-25`, `filter s/COMPLETED`
 **Mark Booking**      | `mark b/BOOKING_ID s/STATUS` <br> e.g., `mark b/2 s/COMPLETED`
 **Today's Bookings**  | `today`
