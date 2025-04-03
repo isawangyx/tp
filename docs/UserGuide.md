@@ -44,8 +44,6 @@ If you type fast, you’ll get your booking tasks done quicker than with any mou
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
-
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
@@ -70,7 +68,7 @@ If you type fast, you’ll get your booking tasks done quicker than with any mou
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `plist`, `blist`, and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -216,11 +214,11 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a person : `pdelete`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `pdelete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -230,11 +228,11 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+### Clearing all entries : `clearall`
 
-Clears all person entries from the address book.
+Clears all person entries and booking entries. Warning: This action is irreversible.
 
-Format: `clear`
+Format: `clearall`
 
 ### Adding a booking: `book`
 
