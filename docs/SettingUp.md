@@ -19,7 +19,7 @@
 Follow the steps in the following guide precisely. Things will not work out if you deviate in some steps.
 </box>
 
-First, **fork** this repo, and **clone** the fork into your computer.
+First, **fork** this [repo](https://github.com/AY2425S2-CS2103T-T08-2/tp), and **clone** the fork into your computer.
 
 If you plan to use Intellij IDEA (highly recommended):
 
@@ -48,14 +48,14 @@ If you plan to use Intellij IDEA (highly recommended):
 
 1. **Set up CI**
 
-   This project comes with a GitHub Actions config files (in `.github/workflows` folder). When GitHub detects those files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set up required.
+   This project comes with a GitHub Actions config files (in `.github/workflows` folder). The files are set up to automate the workflows of testing through CI whenever any push to the master or PR is made. 
 
 1. **Learn the design**
 
-   When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [AddressBook’s architecture](DeveloperGuide.md#architecture).
+   When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [AddressBook’s architecture](DeveloperGuide.md#architecture), given that KrustyKrab is based off AddressBook-Level3.
 
 1. **Do the tutorials**
-   These tutorials will help you get acquainted with the codebase.
+   These tutorials will help you get acquainted with the AddressBook-Level3 codebase, and provide familiarity with our application.
 
    * [Tracing code](https://se-education.org/guides/tutorials/ab3TracingCode.html)
    * [Adding a new command](https://se-education.org/guides/tutorials/ab3AddRemark.html)

@@ -6,11 +6,11 @@
 
 # User Guide
 
-**KrustyKrab** is a lightweight and responsive desktop app for **restaurant staff** to quickly manage customer information and bookings.
+**KrustyKrab** is a lightweight and responsive desktop app for **restaurant staff** to quickly manage patron information and bookings.
 
 KrustyKrab allows you to:
 
-- Keep track of your customers' **contacts** and **bookings**.
+- Keep track of your patrons' **contacts** and **bookings**.
 - Easily view all upcoming bookings at a glance through our **bookings view**.
 - **Add, edit**, and **cancel** bookings with just a few keystrokes.
 
@@ -20,7 +20,7 @@ KrustyKrab is optimized for use via keyboard commands while still being visually
 ## Table of Contents
 1. [Quick Start](#quick-start)
 2. [Command Overview](#command-overview)
-3. [Customer Commands](#customer-commands)
+3. [Patron Commands](#patron-commands)
 4. [Booking Commands](#booking-commands)
 5. [General Commands](#general-commands)
 6. [FAQ](#faq)
@@ -50,9 +50,9 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 Some example commands you can try:
 
-   * `plist` : Lists all customers.
-   * `padd n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a customer named `John Doe` to the customer list.
-   * `badd d/2021-10-01 3:00 PM p/98765432 x/5` : Adds a booking to the customer with phone number 98765432.
+   * `plist` : Lists all patrons.
+   * `padd n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a patron named `John Doe` to the patron list.
+   * `badd d/2021-10-01 3:00 PM p/98765432 x/5` : Adds a booking to the patron with phone number 98765432.
    * `exit` : Exits the app.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ Some example commands you can try:
 
 The commands you can use in KrustyKrab are split into **3 different types**:
 
-- [Customer Commands](#customer-commands)
+- [Patron Commands](#patron-commands)
 - [Booking Commands](#booking-commands)
 - [General Commands](#general-commands)
 
@@ -100,30 +100,30 @@ Each command consists of a **command word**, and zero or more **parameters**.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
-## Customer Commands
-A customer has a **name, phone number, email, address, membership status** and optionally, **tags**.
+## Patron Commands
+A patron has a **name, phone number, email, address, membership status** and optionally, **tags**.
 
 <box type="note" seamless>
 
 **Note:** 
 
-Customers with the same phone number will be counted as **duplicate** customers.
+Patrons with the same phone number will be counted as **duplicate** patrons.
 
 </box>
 
 <br>
 
-### Adding a customer: `padd`
+### Adding a patron: `padd`
 
-Adds a customer to the customers list.
+Adds a patron to the patrons list.
 
 Format: `padd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/IS_MEMBER] [t/TAG]…​`
 
 <box type="tip" seamless>
 
 **Tips:**
-- A customer's default membership status is false unless you set it to true.
-- A customer can have any number of tags (including 0)
+- A patron's default membership status is false unless you set it to true.
+- A patron can have any number of tags (including 0)
 
 </box>
 
@@ -133,9 +133,9 @@ Examples:
 
 <br>
 
-### Editing a customer: `pedit`
+### Editing a patron: `pedit`
 
-Edits the details of the customer identified by the index number in the displayed customers list.  
+Edits the details of the patron identified by the index number in the displayed patrons list.  
 Existing values will be overwritten by the input values.
 
 Format:  
@@ -144,9 +144,9 @@ Format:
 <box type="tip" seamless>
 
 **Tips:**
-- `INDEX` refers to the position of the customer in the **last shown customer list** (must be a positive integer).
+- `INDEX` refers to the position of the patron in the **last shown patron list** (must be a positive integer).
 - At least one field must be provided.
-- You **cannot edit the phone number** of a customer.
+- You **cannot edit the phone number** of a patron.
 - `IS_MEMBER` should be `true` or `false`.
 - Editing tags will replace all existing tags with the new set. To clear all tags, use `t/` without any value.
 
@@ -159,30 +159,30 @@ Examples:
 
 <br>
 
-### Deleting a customer : `pdelete`
-Deletes the specified customer from customers list.
+### Deleting a patron : `pdelete`
+Deletes the specified patron from patrons list.
 
 Format: `pdelete INDEX`
 
-* Deletes the customer at the specified `INDEX`.
-* The index refers to the index number shown in the displayed customers list.
+* Deletes the patron at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patrons list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="warning" seamless>
 
-**Caution**: Deleting a customer also deletes their associated bookings!
+**Caution**: Deleting a patron also deletes their associated bookings!
 
 </box>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd customer in the customers list.
-* `find Betsy` followed by `delete 1` deletes the 1st customer in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd patron in the patrons list.
+* `find Betsy` followed by `delete 1` deletes the 1st patron in the results of the `find` command.
 
 <br>
 
-### Finding customers by name: `find`
+### Finding patrons by name: `find`
 
-Finds all customers whose names contain any of the specified **full-word** keywords (case-insensitive), and displays them as a list with index numbers.
+Finds all patrons whose names contain any of the specified **full-word** keywords (case-insensitive), and displays them as a list with index numbers.
 
 Format:  
 `find KEYWORD [MORE_KEYWORDS]...`
@@ -191,7 +191,7 @@ Format:
 
 **Tips:**
 - Keyword matching is **case-insensitive** but only matches **whole words**.
-- A keyword must match a full word in the customer’s name (e.g., `alex` matches "Alex Tan" but not "Alexander").
+- A keyword must match a full word in the patron’s name (e.g., `alex` matches "Alex Tan" but not "Alexander").
 - You can enter multiple keywords separated by spaces to match more people.
 
 </box>
@@ -207,16 +207,16 @@ Examples:
 
 <br>
 
-### Listing all customers : `plist`
+### Listing all patrons : `plist`
 
-Shows a list of all customers in the customers list.
+Shows a list of all patrons in the patrons list.
 
 Format: `plist`
 
 
 ---
 ## Booking Commands
-A customer can have **zero, one or more** bookings. 
+A patron can have **zero, one or more** bookings. 
 
 <br>
 
@@ -229,7 +229,7 @@ Format: `badd d/DATE_TIME p/PHONE x/PAX [r/REMARK]`
 <box type="tip" seamless>
 
 **Tip:**
-- The phone number must belong to an existing customer.
+- The phone number must belong to an existing patron.
 - Date and time must be in the format: `yyyy-MM-dd h:mm a`  
   (e.g., `2025-04-03 2:30 PM`)
 - You can include an optional remark for the booking.
@@ -309,7 +309,7 @@ Format:
 
 **Tips:**
 - At least one parameter must be provided
-- Phone number must match an existing customer
+- Phone number must match an existing patron
 - Date must be in the format: `yyyy-MM-dd` (e.g., `2023-12-25`)
 - Status must be one of: `UPCOMING`, `COMPLETED`, or `CANCELLED`
 - You can combine parameters to filter bookings more precisely
@@ -317,11 +317,11 @@ Format:
 </box>
 
 Examples:
-* `filter p/98765432` - Shows all bookings made by the customer with phone number 98765432
+* `filter p/98765432` - Shows all bookings made by the patron with phone number 98765432
 * `filter d/2023-12-25` - Shows all bookings on 25 December 2023
 * `filter s/COMPLETED` - Shows all bookings marked as completed
-* `filter p/98765432 d/2023-12-25` - Shows all bookings made by the customer with phone 98765432 on 25 December 2023
-* `filter p/98765432 s/UPCOMING` - Shows all upcoming bookings for the customer with phone 98765432
+* `filter p/98765432 d/2023-12-25` - Shows all bookings made by the patron with phone 98765432 on 25 December 2023
+* `filter p/98765432 s/UPCOMING` - Shows all upcoming bookings for the patron with phone 98765432
 
 `filter p/87438807 s/UPCOMING`
 ![filter p/87438807 s/UPCOMING](images/filter_p87438807_sUPCOMING.png)
@@ -362,16 +362,16 @@ Example:
 
 ### Summarising bookings of the day: `today`
 
-Shows all bookings scheduled for today and the customers who made those bookings.
+Shows all bookings scheduled for today and the patrons who made those bookings.
 
 Format: `today`
 
 * Displays all bookings for the current date.
 * Also shows a summary count of upcoming, completed and cancelled bookings for today.
-* Shows the list of customers who have bookings today.
+* Shows the list of patrons who have bookings today.
 
 Example:
-* `today` → Lists all of today's bookings and customers who made those bookings.
+* `today` → Lists all of today's bookings and patrons who made those bookings.
 
 `today`
 ![today](images/today.png)
@@ -385,11 +385,11 @@ Listed below are the currently supported general commands.
 
 ### Clearing all entries : `clearall`
 
-Clears all customer entries and booking entries.
+Clears all patron entries and booking entries.
 
 <box type="warning" seamless>
 
-**Warning:** All customers and bookings will be cleared. This action is irreversible!
+**Warning:** All patrons and bookings will be cleared. This action is irreversible!
 
 </box>
 
@@ -460,15 +460,15 @@ _Details coming soon ..._
 
 Action                | Format, Examples
 ----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Customer**      | `padd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/IS_MEMBER] [t/TAG]…​` <br> e.g., `padd n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend`
+**Add Patron**      | `padd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/IS_MEMBER] [t/TAG]…​` <br> e.g., `padd n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend`
 **Add Booking**       | `badd d/DATE_TIME p/PHONE x/PAX [r/REMARK]` <br> e.g., `badd d/2025-04-03 2:30 PM p/98765432 x/5 r/Birthday Celebration`
-**List Customers**    | `plist`
+**List Patron**    | `plist`
 **List Bookings**     | `blist`<br> `blist /all`
-**Edit Customer**     | `pedit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [m/IS_MEMBER] [t/TAG]…​` <br> e.g.,`pedit 3 a/123 Sunset Way m/true t/friend t/vip`
+**Edit Patron**     | `pedit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [m/IS_MEMBER] [t/TAG]…​` <br> e.g.,`pedit 3 a/123 Sunset Way m/true t/friend t/vip`
 **Edit Booking**      | `bedit b/BOOKING_ID [d/DATETIME] [x/PAX] [r/REMARK]` <br> e.g., `bedit b/1 d/2025-04-01 9:00 PM x/4 r/Anniversary`
-**Delete Customer**   | `pdelete INDEX` <br> e.g., `pdelete 3`
+**Delete Patron**   | `pdelete INDEX` <br> e.g., `pdelete 3`
 **Delete Booking**    | `bdelete INDEX` <br> e.g., `bdelete 2`
-**Find Customers**    | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find James Jake`
+**Find Patron**    | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find James Jake`
 **Filter Bookings**   | `filter [p/PHONE_NUMBER] [d/DATE] [s/STATUS]` <br> e.g., `filter p/98765432`, `filter d/2023-12-25`, `filter s/COMPLETED`
 **Mark Booking**      | `mark b/BOOKING_ID s/STATUS` <br> e.g., `mark b/2 s/COMPLETED`
 **Today's Bookings**  | `today`
