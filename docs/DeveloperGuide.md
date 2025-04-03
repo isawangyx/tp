@@ -12,9 +12,8 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-_{ https://github.com/se-edu/addressbook-level3 }
 
-[//]: # (_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_)
+This project is based on the [AddressBook-Level3](https://github.com/se-edu/addressbook-level3) project by the [SE-EDU initiative](https://se-education.org/). KrustyKrab uses the following libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -72,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `BookingListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +80,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Booking` objects residing in the `Model`.
 
 ### Logic component
 
@@ -344,12 +343,19 @@ _Implementation to be discussed for future revisions._
 
 **Target user profile**:
 
-* service staff of F&B stores that require prior bookings via customer phone calls.
-* has a need to efficiently manage customer bookings, including status, timing, contact details, and past records.
-* prefers an easy-to-use system for quick searching and retrieval of booking details.
-* benefits from personalized service features for recognizing and managing regular customers.
+* Restaurant staff with a significant number of bookings
+* needs to efficiently manage patron bookings, including status, timing, contact details, and past records
+* wants to personalize services by recognizing regular patrons
+* prefers desktop apps for quick searching and retrieval of booking details
+* can type fast
+* is reasonably comfortable using CLI apps
 
-**Value proposition**: Provides a centralized system for managing customer bookings, reducing the time spent searching for reservations, and improving efficiency. Enables personalized service by tracking visit history and preferences while offering quick filtering, notifications, and daily summaries.
+**Value proposition**: 
+
+* Manage patrons' information and bookings faster than a typical mouse/GUI driven app
+* Accommodate patrons who need to reschedule, making for a flexible booking tool
+* Track patrons' visit history and preferences for personalized services
+* Summarise daily bookings to streamline shift preparation and optimize resource allocation
 
 
 ### User stories
@@ -358,36 +364,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​         | I want to …​                                                 | So that I can…​                                            |
 |----------|----------------|--------------------------------------------------------------|------------------------------------------------------------|
-| `* * *`  | service staff  | add a new booking with customer details                      | keep track of upcoming reservations                        |
-| `* * *`  | service staff  | delete a booking                                             | remove cancellations or incorrect entries                  |
-| `* * *`  | service staff  | view a list of all upcoming bookings                         | quickly see my schedule                                    |
-| `* * *`  | service staff  | mark a booking as completed                                  | keep track of which customers have visited                 |
-| `* * *`  | service staff  | add notes to a customer profile                              | remember preferences like seating choices, allergies, etc. |
-| `* * *`  | service staff  | search for a booking using a customer’s name or phone number | quickly find their reservation details                     |
-| `* * *`  | service staff  | save a new customer’s contact information                    | quickly find their details for future bookings             |
-| `* * *`  | service staff  | edit a customer’s contact details                            | update incorrect or outdated information                   |
-| `* * *`  | service staff  | delete customer contact details                              | maintain an updated list                                   |
-| `* * *`  | service staff  | store data offline                                           | keep all information for future use and tracking           |
-| `* * *`  | service staff  | view all upcoming bookings                                   | prepare for each day                                       |
-| `* *`    | service staff  | delete all completed bookings                                | clear unnecessary backlogs                                 |
-| `* *`    | service staff  | edit an existing booking                                     | update details when a customer changes their reservation   |
-| `* *`    | service staff  | sort bookings by date or time                                | find what I need quickly                                   |
-| `* *`    | service staff  | filter bookings by date                                      | see only the relevant reservations                         |
-| `* * `   | service staff  | view a customer’s past booking history                       | provide a more personalized experience                     |
-| `* *`    | service staff  | view a summary of today’s bookings on the homepage           | see important details at a glance                          |
-| `* *`    | service staff  | receive notifications for same-day bookings                  | prepare for upcoming visitors                              |
-| `* *`    | service staff  | automatically set reminders for upcoming bookings            | avoid forgetting customer reservations                     |
-| `* *`    | service staff  | see the frequency of a customer’s visits                     | recognize regular customers                                |
-| `* *`    | service staff  | tag VIP or frequent customers                                | provide them with special perks or greetings               |
-| `* *`    | service staff  | save member emails for follow-up emails                      | send reservation reminders and encourage repeat visits     |
-| `* *`    | service staff  | flag customers with repeated no-shows                        | manage bookings more effectively                           |
-| `* *`    | service staff  | assign specific bookings to different team members           | coordinate who is handling each customer                   |
-| `* *`    | service staff  | see an overview of all bookings for the week/month           | better manage the workload                                 |
-| `* *`    | service staff  | print a list of bookings                                     | have a hard copy for reference                             |
-| `* * `   | service staff  | see the number of bookings for each day                      | know how busy it will be                                   |
-| `*`      | service staff  | validate member emails                                       | ensure they are in the correct input format                |
-| `*`      | service staff  | quickly duplicate a previous booking                         | save time for repeat customers                             |
-| `* `     | service staff  | view booking trends (e.g., peak hours, popular days)         | prepare for busy periods                                   |
+| `* * *`  | restaurant staff  | add a new booking with patron details                      | keep track of upcoming reservations                        |
+| `* * *`  | restaurant staff  | delete a booking                                             | remove cancellations or incorrect entries                  |
+| `* * *`  | restaurant staff  | view a list of all upcoming bookings                         | quickly see my schedule                                    |
+| `* * *`  | restaurant staff  | mark a booking as completed                                  | keep track of which patrons have visited                 |
+| `* * *`  | restaurant staff  | add notes to a patron profile                              | remember preferences like seating choices, allergies, etc. |
+| `* * *`  | restaurant staff  | search for a booking using a patron’s name or phone number | quickly find their reservation details                     |
+| `* * *`  | restaurant staff  | save a new patron’s contact information                    | quickly find their details for future bookings             |
+| `* * *`  | restaurant staff  | edit a patron’s contact details                            | update incorrect or outdated information                   |
+| `* * *`  | restaurant staff  | delete patron contact details                              | maintain an updated list                                   |
+| `* * *`  | restaurant staff  | store data offline                                           | keep all information for future use and tracking           |
+| `* * *`  | restaurant staff  | view all upcoming bookings                                   | prepare for each day                                       |
+| `* *`    | restaurant staff  | delete all completed bookings                                | clear unnecessary backlogs                                 |
+| `* *`    | restaurant staff  | edit an existing booking                                     | update details when a patron changes their reservation   |
+| `* *`    | restaurant staff  | sort bookings by date or time                                | find what I need quickly                                   |
+| `* *`    | restaurant staff  | filter bookings by date                                      | see only the relevant reservations                         |
+| `* * `   | restaurant staff  | view a patron’s past booking history                       | provide a more personalized experience                     |
+| `* *`    | restaurant staff  | view a summary of today’s bookings on the homepage           | see important details at a glance                          |
+| `* *`    | restaurant staff  | receive notifications for same-day bookings                  | prepare for upcoming visitors                              |
+| `* *`    | restaurant staff  | automatically set reminders for upcoming bookings            | avoid forgetting patron reservations                     |
+| `* *`    | restaurant staff  | see the frequency of a patron’s visits                     | recognize regular patrons                                |
+| `* *`    | restaurant staff  | tag VIP or frequent patrons                                | provide them with special perks or greetings               |
+| `* *`    | restaurant staff  | save member emails for follow-up emails                      | send reservation reminders and encourage repeat visits     |
+| `* *`    | restaurant staff  | flag patrons with repeated no-shows                        | manage bookings more effectively                           |
+| `* *`    | restaurant staff  | see an overview of all bookings for the week/month           | better manage the workload                                 |
+| `* *`    | restaurant staff  | print a list of bookings                                     | have a hard copy for reference                             |
+| `* * `   | restaurant staff  | see the number of bookings for each day                      | know how busy it will be                                   |
+| `*`      | restaurant staff  | validate member emails                                       | ensure they are in the correct input format                |
+| `*`      | restaurant staff  | quickly duplicate a previous booking                         | save time for repeat patrons                             |
+| `*`      | restaurant staff  | view booking trends (e.g., peak hours, popular days)         | prepare for busy periods                                   |
+| `*`      | restaurant staff  | assign specific bookings to different team members           | coordinate who is handling each patron                   |
 
 ### Use cases
 
@@ -395,32 +401,90 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## **Use Case: Add a Person**
+### **Use case: Add a person**
 
 **MSS**
-1. User requests to add a new person by entering their details (name, phone, email, address, and optional tags).
+1. User requests to add a new person by entering their details (name, phone, email, address, membership status and optional tags).
 2. System validates the input.
 3. System saves the new person to the address book.
 4. System displays a confirmation message:  
-   *"New contact added: [person details]"*
+   *"New person added: [person details]"*
 
 Use case ends.
 
 **Extensions**
-- **1a.** Invalid input (e.g., empty name, bad email format).
-    - 1a1. System shows an error message: *"Invalid input: [reason]"*
+- **1a.** Invalid input (e.g., empty name, invalid email format, invalid phone number).
+    - 1a1. System shows error message.
     - 1a2. Use case resumes at step 1.
 
 - **1b.** Person with the same phone number already exists.
-    - 1b1. System shows an error message: *"A person with this phone number already exists."*
+    - 1b1. System alerts the user that the person already exists.
     - 1b2. Use case ends.
 
 ---
 
-## **Use Case: Add a Booking**
+### **Use case: Edit a person**
 
 **MSS**
-1. User requests to add a new booking by providing phone number, date/time, pax, optional remark, and tags.
+1. User requests to edit an existing person by specifying their index and providing new details (name, email, address, membership status, and optional tags).
+2. System validates the input (ensuring no empty fields, valid email format).
+3. System saves the new person to the address book and notifies the user.
+
+Use case ends.
+
+**Extensions**
+- **1a.** Invalid input (e.g., empty name, invalid email format).
+    - 1a1. System shows error message.
+    - 1a2. Use case resumes at step 1.
+- **1b.** No person found with the provided index.
+    - 1b1. System shows error message.
+    - 1b2. Use case ends.
+- **1c.** Attempting to edit the phone number.
+    - 1b1. System shows error message.
+    - 1b2. Use case ends.
+
+---
+
+### **Use case: Delete a person**
+
+**MSS**
+1. User requests to delete a person.
+2. System deletes the person from the list and notifies the user.
+
+Use case ends.
+
+**Extensions**
+- **1a.** Invalid input (e.g., invalid person id).
+    - 1a1. System shows error message.
+    - 1a2. Use case resumes at step 1.
+
+---
+
+### **Use case: View a list of all persons**
+
+**MSS**
+1. User requests to view a list of all persons.
+2. System displays the list of persons to the user.
+
+Use case ends.
+
+---
+
+### **Use case: Find a person**
+
+**MSS**
+1. User requests to find a person, providing one or more search keywords.
+2. System displays the students that fit the search term.
+3. User scrolls through the displayed list to find the person they are looking for.
+
+Use case ends.
+
+---
+
+### **Use case: Add a booking**
+
+**MSS**
+1. User requests to add a new booking by providing phone number, date/time, pax and optional remark.
 2. System checks if a person with the given phone number exists.
     - If **no**, system shows: *"No person with the given phone number exists."*  
       Use case ends.
@@ -441,115 +505,121 @@ Use case ends.
     - 3a1. System shows relevant error message.
     - 3a2. Use case resumes at step 1.
 
-- **4a.** A booking already exists for the same date/time.
-    - 4a1. System shows: *"A booking already exists for this date and time."*
-    - 4a2. Use case ends.
+---
+
+### **Use case: Edit a booking**
+
+**MSS**
+1. User requests to edit an existing booking by specifying their index and providing new details.
+2. System validates the input.
+3. System saves the new booking to the address book and notifies the user.
+
+Use case ends.
+
+**Extensions**
+- **1a.** Invalid input (e.g., empty booking id, negative pax, wrong date format)
+    - 1a1. System shows error message.
+    - 1a2. Use case resumes at step 1.
+- **1b.** No booking found with the provided index.
+    - 1b1. System shows error message.
+    - 1b2. Use case ends.
+
 
 ---
 
-**Use Case: Delete Booking**
+### **Use case: Delete a booking**
 
 **MSS**
-1. User requests to delete a specific booking for a contact with contact number and index.
+1. User requests to delete a booking by specifying their index.
 2. System deletes the booking.
 3. System displays a confirmation message.
 
 Use case ends.
 
 **Extensions**
-- **1a.** The given contact number does not exist.
-    - 1a1. System shows an error message: *"The given contact number does not exist in our system."*
-    - 1a2. Use case resumes at step 1.
-
-- **1b.** The given index is invalid (out of range or non-numeric).
-    - 1b1. System shows an error message: *"There is no booking at the given index."*
-    - 1b2. Use case resumes at step 1.
-
----
-
-**Use Case: Mark Booking as Done**
-
-**MSS**
-1. User requests to mark a specific booking as completed or cancelled with contact number and index.
-2. System marks the booking as completed or cancelled.
-3. System displays a confirmation message.
-
-Use case ends.
-
-**Extensions**
-- **1a.** The given contact number does not exist.
+- **1a.** The given index is invalid (out of range or non-positive integer).
     - 1a1. System shows an error message.
     - 1a2. Use case resumes at step 1.
 
-- **1b.** The given index is invalid (out of range or non-numeric).
-    - 1b1. System shows an error message: *"There is no booking at the given index."*
-    - 1b2. Use case resumes at step 2.
-
 ---
 
-**Use Case: List Bookings**
+### **Use case: Mark a booking**
 
 **MSS**
-1. User requests to list bookings.
-2. System displays a list of bookings that are still pending.
+1. User requests to mark a specific booking as upcoming, completed or cancelled with index.
+2. System marks the booking with the specified status.
+3. System displays a confirmation message.
 
 Use case ends.
 
 **Extensions**
-- **2a.** User provides the `/all` flag.
-    - 2a1. System displays all bookings, including completed or cancelled ones.
-    - 2a2. Use case ends.
-
-- **2b.** There are no pending bookings.
-    - 2b1. System shows an error message.
-    - 2b2. Use case ends.
+- **1a.** The given index is invalid (out of range or non-positive integer).
+    - 1a1. System shows an error message.
+    - 1a2. Use case resumes at step 1.
 
 ---
 
-**Use Case: Filter**
-
+### **Use case: View a list of bookings**
 
 **MSS**
-1. User requests to filter bookings by providing a phone number.
-2. System checks if a contact with the given phone number exists.
-    - If **yes**, proceed to step 3.
-    - If **no**, system shows an error message.
-      Use case ends.
-3. System retrieves all bookings associated with the contact.
-    - If **no bookings exist**, system shows an error message.
-      Use case ends.
-4. System displays the list of bookings for the contact.
+1. User requests to view a list of all bookings with status "UPCOMING".
+2. System displays a list of bookings with status "UPCOMING".
 
 Use case ends.
 
 **Extensions**
-- **2a.** Contact does not exist.
+- **1a.** User provides the `/all` flag.
+    - 1a1. System displays all bookings, including completed and cancelled ones.
+    - 1a2. Use case ends.
+
+- **2a.** There are no bookings with status "UPCOMING".
     - 2a1. System shows an error message.
     - 2a2. Use case ends.
-
-- **3a.** Contact exists but has no bookings.
-    - 3a1. System shows an error message.
-    - 3a2. Use case ends.
 
 ---
 
-**Use Case: Clear Completed Bookings**
+### **Use case: Filter bookings**
 
 **MSS**
-1. User requests to clear all completed or cancelled bookings.
-2. System deletes all bookings that are marked as completed or cancelled. 
-    - 2a.There are no completed bookings in the system. 
+1. User requests to filter bookings by providing a phone number, booking date or booking status.
+2. System applies the filtering criteria (phone number and/or booking date and/or booking status).
+3. System retrieves all bookings associated with the filter.
+4. System displays the filtered list of bookings.
+
+Use case ends.
+
+**Extensions**
+- **2a.** No bookings match the filtering criteria.
     - 2a1. System shows an error message.
     - 2a2. Use case ends.
+
+---
+
+### **Use case: Clear completed and cancelled bookings**
+
+**MSS**
+1. User requests to clear all completed and cancelled bookings.
+2. System deletes all bookings that are marked as completed or cancelled.
 3. System displays a confirmation message.
 
 Use case ends.
 
 ---
 
-**Use Case: Exit**
+### **Use case: Clear all persons and bookings**
 
-**Main Success Scenario (MSS)**
+**MSS**
+1. User requests to clear the entire database (persons list and bookings list).
+2. System clears the database. 
+3. System displays a confirmation message.
+
+Use case ends.
+
+---
+
+### **Use case: Exit**
+
+**MSS**
 1. User requests to exit the application.
 2. System displays a confirmation message and closes the application.
 
@@ -571,15 +641,21 @@ Use case ends.
 
 ### Glossary
 
+* **CLI**: Stands for Command-Line Interface, a text-based interface where you can input commands that interact with the program. 
+* **GUI**: Stands for Graphical User Interface, a user interface where you interact with a program through graphical icons and visual indicators.
 * **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Private Contact Detail**: A contact detail that is not meant to be shared with others
-* **Command-Based UI**: A user interface where actions are performed through typed commands rather than graphical elements like buttons or menus
 * **Booking**: A reservation entry associated with a contact, storing details such as date, time, and optional tags
 * **Tag**: A custom label assigned to a contact or booking to help with categorization and filtering
 * **Index**: A 1-based position number used to reference a booking in a contact’s list
-* **VIP**: A special tag or designation for important customers who may receive priority service or benefits
 --------------------------------------------------------------------------------------------------------------------
+## **Appendix: Planned Enhancements**
 
+1. **Enhance Booking Conflict Detection**: Implement a feature to ensure that upcoming bookings are not overlapped with each other, considering factors like booking type, duration, and person availability. This will prevent double-booking and improve user experience by making sure only valid booking slots are available. 
+2. **Add Notification System for Upcoming Bookings**: Introduce a notification system to alert users of their upcoming bookings. This enhancement will include customizable notification preferences, allowing users to choose when they want to be reminded (e.g., 24 hours before, 1 hour before, etc.).
+3. **Improve Reporting Capabilities**: Expand the reporting features to allow users to generate detailed reports of booking history, including the number of bookings made, booking frequency, and utilization rates. This will help users track booking patterns and identify potential areas for optimization.
+
+--------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -596,14 +672,12 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
-
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -614,13 +688,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `plist` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
