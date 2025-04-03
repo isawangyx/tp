@@ -29,9 +29,13 @@
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
-  * [Features]({{ baseUrl }}/UserGuide.html#features)
+  * [Command Overview]({{ baseUrl }}/UserGuide.html#command-overview)
+  * [Customer Commands]({{ baseUrl }}/UserGuide.html#customer-commands)
+  * [Booking Commands]({{ baseUrl }}/UserGuide.html#booking-commands)
+  * [General Commands]({{ baseUrl }}/UserGuide.html#general-commands)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
-  * [Command Summary]({{ baseUrl }}/UserGuide.html#faq)
+  * [Known Issues]({{ baseUrl }}/UserGuide.html#known-issues)
+  * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
