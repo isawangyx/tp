@@ -159,6 +159,28 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Tracking Bookings
+
+#### Implementation
+
+The `Booking` class is a class under the Model component. It is used to represent a booking made by a customer. The class contains the following fields:
+* `bookingId` - a unique identifier for the booking.
+* `bookingPerson` - the person who made the booking.
+* `bookingDateTime` - the date and time of the booking.
+* `bookingMadeDateTime` - the date and time at which the booking _was made_.
+* `status` - the status of the booking (e.g., Upcoming, Completed, Cancelled).
+* `pax` - the number of people for the booking.
+* `remark` - any remarks made by the customer.
+
+Patrons and bookings have a one-to-many relationship, where a patron can have multiple bookings. 
+As such:
+- The `Booking` class contains a reference to the `Person` class, which represents the patron who made the booking. 
+- Patrons have a `bookingIds` field that contains a list of booking IDs linked to the booking's `bookingId` field, which are unique identifiers for each booking made by the patron.
+
+Bookings are stored in the `UniqueBookingList` class, which is a list of unique bookings, and it ensures that no two bookings with the same booking ID exist in the list.
+The `UniqueBookingList` class provides methods to add, delete, and search for bookings. It also provides methods to filter bookings by date and time, and to sort bookings by date and time, all separate from the list of persons represented by `UniquePersonsList`.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
