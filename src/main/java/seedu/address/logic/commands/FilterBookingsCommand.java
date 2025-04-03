@@ -18,7 +18,7 @@ import seedu.address.model.person.Phone;
 /**
  * Changes the remark of an existing person in the address book.
  */
-public class FilterCommand extends Command {
+public class FilterBookingsCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
@@ -42,7 +42,7 @@ public class FilterCommand extends Command {
     /**
      * Creates a Filter Command to list the bookings of specified {@code Person}
      */
-    public FilterCommand(Phone phoneNumber, LocalDateTime bookingDate, Status status) {
+    public FilterBookingsCommand(Phone phoneNumber, LocalDateTime bookingDate, Status status) {
         this.phoneNumber = phoneNumber;
         this.bookingDate = bookingDate;
         this.status = status;
@@ -98,9 +98,9 @@ public class FilterCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof FilterCommand
-                && Objects.equals(phoneNumber, ((FilterCommand) other).phoneNumber)
-                && Objects.equals(bookingDate, ((FilterCommand) other).bookingDate)
-                && Objects.equals(status, ((FilterCommand) other).status));
+                || (other instanceof FilterBookingsCommand
+                && Objects.equals(phoneNumber, ((FilterBookingsCommand) other).phoneNumber)
+                && Objects.equals(bookingDate, ((FilterBookingsCommand) other).bookingDate)
+                && Objects.equals(status, ((FilterBookingsCommand) other).status));
     }
 }

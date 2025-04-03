@@ -23,7 +23,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.PersonBuilder;
 
-public class FilterCommandTest {
+public class FilterBookingsCommandTest {
 
     @Test
     public void execute_validPhoneAndDateAndStatus_success() throws Exception {
@@ -35,11 +35,11 @@ public class FilterCommandTest {
 
         ModelStubWithBooking modelStub = new ModelStubWithBooking(person, booking);
 
-        FilterCommand command = new FilterCommand(new Phone("91234567"),
+        FilterBookingsCommand command = new FilterBookingsCommand(new Phone("91234567"),
                 booking.getBookingDateTime(), Status.UPCOMING);
 
         CommandResult result = command.execute(modelStub);
-        assertEquals(String.format(FilterCommand.MESSAGE_SUCCESS,
+        assertEquals(String.format(FilterBookingsCommand.MESSAGE_SUCCESS,
                         " for phone number 91234567 on 05 Apr 2025 with status Upcoming"),
                 result.getFeedbackToUser());
     }
@@ -51,11 +51,12 @@ public class FilterCommandTest {
         booking.setBookingPerson(person);
 
         ModelStubWithBooking modelStub = new ModelStubWithBooking(person, booking);
-        FilterCommand command = new FilterCommand(new Phone("99999999"),
+        FilterBookingsCommand command = new FilterBookingsCommand(new Phone("99999999"),
                 booking.getBookingDateTime(), Status.UPCOMING);
 
         assertThrows(CommandException.class,
-                String.format(FilterCommand.MESSAGE_PERSON_NOT_FOUND, "99999999"), () -> command.execute(modelStub));
+                String.format(FilterBookingsCommand.MESSAGE_PERSON_NOT_FOUND, "99999999"), () ->
+                        command.execute(modelStub));
     }
 
     @Test
@@ -68,11 +69,11 @@ public class FilterCommandTest {
 
         ModelStubWithBooking modelStub = new ModelStubWithBooking(person, booking);
 
-        FilterCommand command = new FilterCommand(new Phone("91234567"),
+        FilterBookingsCommand command = new FilterBookingsCommand(new Phone("91234567"),
                 booking.getBookingDateTime().plusDays(1), Status.CANCELLED);
 
         CommandResult result = command.execute(modelStub);
-        assertEquals(String.format(FilterCommand.MESSAGE_NO_BOOKINGS,
+        assertEquals(String.format(FilterBookingsCommand.MESSAGE_NO_BOOKINGS,
                         " for phone number 91234567 on 06 Apr 2025 with status Cancelled"),
                 result.getFeedbackToUser());
     }
@@ -80,14 +81,15 @@ public class FilterCommandTest {
     @Test
     public void execute_filterByDateOnlyWithResults_success() throws Exception {
         Person person = new PersonBuilder().build();
-        Booking booking = new Booking(person, LocalDateTime.of(2025, 3, 28, 18, 0), "Dinner", 2);
+        Booking booking = new Booking(person, LocalDateTime.of(2025, 3, 28, 18, 0),
+                "Dinner", 2);
         booking.setBookingPerson(person);
 
         ModelStubWithBooking modelStub = new ModelStubWithBooking(person, booking);
-        FilterCommand command = new FilterCommand(null, booking.getBookingDateTime(), null);
+        FilterBookingsCommand command = new FilterBookingsCommand(null, booking.getBookingDateTime(), null);
         CommandResult result = command.execute(modelStub);
 
-        assertEquals(String.format(FilterCommand.MESSAGE_SUCCESS, " on 28 Mar 2025"),
+        assertEquals(String.format(FilterBookingsCommand.MESSAGE_SUCCESS, " on 28 Mar 2025"),
                 result.getFeedbackToUser());
         assertEquals(1, modelStub.getFilteredBookingList().size());
     }
@@ -99,10 +101,10 @@ public class FilterCommandTest {
         booking.setBookingPerson(person);
 
         ModelStubWithBooking modelStub = new ModelStubWithBooking(person, booking);
-        FilterCommand command = new FilterCommand(null, null, Status.COMPLETED);
+        FilterBookingsCommand command = new FilterBookingsCommand(null, null, Status.COMPLETED);
         CommandResult result = command.execute(modelStub);
 
-        assertEquals(String.format(FilterCommand.MESSAGE_NO_BOOKINGS, " with status Completed"),
+        assertEquals(String.format(FilterBookingsCommand.MESSAGE_NO_BOOKINGS, " with status Completed"),
                 result.getFeedbackToUser());
         assertEquals(0, modelStub.getFilteredBookingList().size());
     }
@@ -110,17 +112,18 @@ public class FilterCommandTest {
     @Test
     public void execute_filterByPhoneAndDateWithNoMatchingBookings_showsNoBookings() throws Exception {
         Person person = new PersonBuilder().build();
-        Booking booking = new Booking(person, LocalDateTime.of(2025, 3, 28, 20, 0), "Supper", 2);
+        Booking booking = new Booking(person, LocalDateTime.of(2025, 3, 28, 20, 0),
+                "Supper", 2);
         booking.setBookingPerson(person);
 
         ModelStubWithBooking modelStub = new ModelStubWithBooking(person, booking);
 
         // Filtering for a date that doesn't match the booking date
-        FilterCommand command = new FilterCommand(person.getPhone(),
+        FilterBookingsCommand command = new FilterBookingsCommand(person.getPhone(),
                 LocalDateTime.of(2025, 3, 29, 20, 0), null);
         CommandResult result = command.execute(modelStub);
 
-        assertEquals(String.format(FilterCommand.MESSAGE_NO_BOOKINGS,
+        assertEquals(String.format(FilterBookingsCommand.MESSAGE_NO_BOOKINGS,
                         " for phone number " + person.getPhone() + " on 29 Mar 2025"),
                 result.getFeedbackToUser());
         assertEquals(0, modelStub.getFilteredBookingList().size());
