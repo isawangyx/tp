@@ -543,7 +543,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `plist` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
@@ -558,8 +558,15 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
+1. Normal saving and loading
+
+   1. After some edits (i.e. not just the dummy data), `exit` or simply close the app.
+   2. Re-launch the app, and confirm that the same data is there, using commands like `plist` and `blist /all`.
+
 1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Missing: An empty address book will be created.
+      The following will be logged as an info: "Creating a new data file " + storage.getAddressBookFilePath()
+      + " populated with a sample AddressBook.".
+   2. Corrupted: A DataLoadingException is thrown. An empty address book will be created.
+      The following will be logged as a warning: "Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+      + " Will be starting with an empty AddressBook.".
