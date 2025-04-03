@@ -9,20 +9,20 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddBookingCommand;
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddPersonCommand;
+import seedu.address.logic.commands.ClearAllCommand;
 import seedu.address.logic.commands.ClearBookingsCommand;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteBookingCommand;
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.EditBookingCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListBookingCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListPersonsCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.TodayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -61,53 +61,53 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddPersonCommand.COMMAND_WORD:
+            return new AddPersonCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case AddBookingCommand.COMMAND_WORD:
+            return new AddBookingCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case EditPersonCommand.COMMAND_WORD:
+            return new EditPersonCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+        case EditBookingCommand.COMMAND_WORD:
+            return new EditBookingCommandParser().parse(arguments);
+
+        case DeletePersonCommand.COMMAND_WORD:
+            return new DeletePersonCommandParser().parse(arguments);
+
+        case DeleteBookingCommand.COMMAND_WORD:
+            return new DeleteBookingCommandParser().parse(arguments);
+
+        case MarkCommand.COMMAND_WORD:
+            return new MarkCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
+
+        case ListPersonsCommand.COMMAND_WORD:
+            return new ListPersonsCommand();
+
+        case ListBookingCommand.COMMAND_WORD:
+            return new ListBookingCommandParser().parse(arguments);
+
+        case ClearAllCommand.COMMAND_WORD:
+            return new ClearAllCommand();
+
+        case ClearBookingsCommand.COMMAND_WORD:
+            return new ClearBookingsCommand();
+
+        case TodayCommand.COMMAND_WORD:
+            return new TodayCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
-        case AddBookingCommand.COMMAND_WORD:
-            return new AddBookingCommandParser().parse(arguments);
-
-        case MarkCommand.COMMAND_WORD:
-            return new MarkCommandParser().parse(arguments);
-
-        case ListBookingCommand.COMMAND_WORD:
-            return new ListBookingCommandParser().parse(arguments);
-
-        case ClearBookingsCommand.COMMAND_WORD:
-            return new ClearBookingsCommand();
-
-        case FilterCommand.COMMAND_WORD:
-            return new FilterCommandParser().parse(arguments);
-
-        case EditBookingCommand.COMMAND_WORD:
-            return new EditBookingCommandParser().parse(arguments);
-
-        case TodayCommand.COMMAND_WORD:
-            return new TodayCommandParser().parse(arguments);
-
-        case DeleteBookingCommand.COMMAND_WORD:
-            return new DeleteBookingCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

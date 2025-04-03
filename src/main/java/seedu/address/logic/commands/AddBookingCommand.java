@@ -52,7 +52,7 @@ public class AddBookingCommand extends Command {
     private final int paxToAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Booking}
+     * Creates an AddPersonCommand to add the specified {@code Booking}
      */
     public AddBookingCommand(Phone phone, LocalDateTime bookingDate, String remark, int pax) {
         requireNonNull(phone);

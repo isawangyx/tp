@@ -8,9 +8,9 @@ import seedu.address.model.Model;
 /**
  * Clears the address book.
  */
-public class ClearCommand extends Command {
+public class ClearAllCommand extends Command {
 
-    public static final String COMMAND_WORD = "resetall";
+    public static final String COMMAND_WORD = "clearall";
     public static final String MESSAGE_SUCCESS = "Address book and all bookings have been cleared!";
 
 

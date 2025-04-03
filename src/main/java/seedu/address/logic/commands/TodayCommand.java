@@ -28,7 +28,7 @@ public class TodayCommand extends Command {
     private final LocalDate dateOfInterest;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddPersonCommand to add the specified {@code Person}
      */
     public TodayCommand(LocalDate date) {
         requireNonNull(date);
