@@ -46,10 +46,6 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_ADDRESS, PREFIX_ISMEMBER);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        if (!phone.value.matches("\\d{7,15}")) {
-            throw new ParseException(
-                    "Phone numbers should only contain numbers, and should be between 7 and 15 digits");
-        }
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         boolean isMember = ParserUtil.parseIsMember(argMultimap.getValue(PREFIX_ISMEMBER).orElse("false"));
