@@ -4,7 +4,7 @@
 
 ## Welcome to the KrustyKrab
 
-_For all service staff folks who struggle with keeping track of who's coming to eat._
+_For all restaurant staff folks who struggle with keeping track of who's coming to eat._
 
 This is a **CLI-based bookings tracker** which helps in keeping track of booking details and customer information in a simple, efficient, and centralized system for quick and easy management.
 
@@ -16,7 +16,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 >
 > ~ Mr Krabs
 
-KrustyKrab provides service staff with a centralised platform that allows them to keep track of both customers and their bookings, with an easy command-based interface to allow staff to:
+KrustyKrab provides restaurant staff with a centralised platform that allows them to keep track of both customers and their bookings, with an easy command-based interface to allow staff to:
 
 Customer Commands
 - Add customers
