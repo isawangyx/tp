@@ -123,22 +123,6 @@ Examples:
 
 ---
 
-### Listing all persons : `plist`
-
-Shows a list of all persons in the address book.
-
-Format: `plist`
-
----
-
-### Listing all persons : `blist`
-
-Shows a list of all bookings in the address book in order of upcoming date.
-
-Format: `blist`
-
----
-
 ### Editing a person: `pedit`
 
 Edits the details of the person identified by the index number in the displayed person list.  
@@ -191,6 +175,52 @@ Examples:
 
 ---
 
+### Deleting a person : `pdelete`
+
+Deletes the specified person from the address book.
+
+Format: `pdelete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+---
+
+### Deleting a booking : `bdelete`
+
+Deletes the specified booking from the address book.
+
+Format: `bdelete INDEX`
+
+* Deletes the booking with the specified `INDEX`.
+* The index refers to the unique booking ID of the booking.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `bdelete 2` deletes the booking with ID 2.
+
+---
+
+### Marking a booking status: `mark`
+
+Marks a booking with a new status (UPCOMING, COMPLETED, CANCELLED).
+
+Format:  
+`mark b/BOOKING_ID s/STATUS`
+
+* The `BOOKING_ID` is shown when you list bookings.
+* Status must be exactly one of: `UPCOMING`, `COMPLETED`, `CANCELLED`.
+
+Example:
+* `mark b/2 s/COMPLETED`
+
+---
+
 ### Finding persons by name: `find`
 
 Finds all persons whose names contain any of the specified **full-word** keywords (case-insensitive), and displays them as a list with index numbers.
@@ -214,42 +244,42 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `pdelete`
+---
 
-Deletes the specified person from the address book.
+### Filtering bookings: `filter`
 
-Format: `pdelete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clearall`
-
-Clears all person entries and booking entries. Warning: This action is irreversible.
-
-Format: `clearall`
-
-### Adding a booking: `book`
-
-Adds a booking linked to a person based on their phone number.
+Filters and displays bookings based on phone number, date, status, or any combination.
 
 Format:  
-`book d/DATE p/PHONE_NUMBER x/PAX [r/REMARK] [t/TAG]…​`
+`filter [p/PHONE_NUMBER] [d/DATE] [s/STATUS]`
 
-* The `PHONE_NUMBER` must match an existing person in the address book.
-* Date format: `yyyy-MM-dd HH:mm` (e.g., 2021-10-01 15:00).
-* A person can have multiple bookings.
-* You can include multiple tags or none at all.
+<box type="tip" seamless>
+
+**Tips:**
+- At least one parameter must be provided
+- Phone number must match an existing person
+- Date must be in the format: `yyyy-MM-dd` (e.g., `2023-12-25`)
+- Status must be one of: `UPCOMING`, `COMPLETED`, or `CANCELLED`
+- You can combine parameters to filter bookings more precisely
+
+</box>
 
 Examples:
-* `book d/2025-04-01 18:00 p/98765432 x/4 r/Birthday Dinner t/VIP`
-* `book d/2025-05-10 12:30 p/91234567 x/2 t/Lunch`
+* `filter p/98765432` - Shows all bookings made by the person with phone number 98765432
+* `filter d/2023-12-25` - Shows all bookings on 25 December 2023
+* `filter s/COMPLETED` - Shows all bookings marked as completed
+* `filter p/98765432 d/2023-12-25` - Shows all bookings made by the person with phone 98765432 on 25 December 2023
+* `filter p/98765432 s/UPCOMING` - Shows all upcoming bookings for the person with phone 98765432
 
+---
+
+### Listing all persons : `plist`
+
+Shows a list of all persons in the address book.
+
+Format: `plist`
+
+---
 
 ### Listing bookings: `blist`
 
@@ -263,8 +293,17 @@ Examples:
 * `blist` → Lists only upcoming bookings.
 * `blist /all` → Lists all bookings.
 
+---
 
-### Clearing completed & cancelled bookings: `clearbookings`
+### Clearing all entries : `clearall`
+
+Clears all person entries and booking entries. Warning: This action is irreversible.
+
+Format: `clearall`
+
+---
+
+### Clearing completed and cancelled bookings: `clearbookings`
 
 Clears all bookings marked as **Completed** or **Cancelled**.
 
@@ -276,30 +315,22 @@ Format:
 Example:
 * `clearbookings`
 
-### Marking a booking status: `mark`
+---
 
-Marks a booking with a new status (UPCOMING, COMPLETED, CANCELLED).
+### Today's bookings : `today`
 
-Format:  
-`mark b/BOOKING_ID s/STATUS`
+Shows all bookings scheduled for today and the related persons who made those bookings.
 
-* The `BOOKING_ID` is shown when you list bookings.
-* Status must be exactly one of: `UPCOMING`, `COMPLETED`, `CANCELLED`.
+Format: `today`
 
-Example:
-* `mark b/2 s/COMPLETED`
-
-### Filtering bookings by person: `filter`
-
-Displays all bookings made by a specific person based on their phone number.
-
-Format:  
-`filter p/PHONE_NUMBER`
-
-* Phone number must match an existing person.
+* Displays all bookings for the current date.
+* Also shows a summary count of upcoming, completed and cancelled bookings for today.
+* Shows the list of persons who have bookings today.
 
 Example:
-* `filter p/98765432`
+* `today` → Lists all of today's bookings and related persons.
+
+---
 
 ### Exiting the program : `exit`
 
@@ -307,6 +338,7 @@ Exits the program.
 
 Format: `exit`
 
+---
 
 ### Saving the data
 
@@ -342,20 +374,23 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
-**Add Booking**    | `book d/DATE p/PHONE_NUMBER x/PAX [r/REMARK] [t/TAG]…​`<br> e.g., `book d/2025-04-01 18:00 p/98765432 x/4 r/Birthday t/VIP`
-**List Bookings**  | `blist`<br> `blist /all`
-**Clear Bookings** | `clearbookings`
-**Mark Booking**   | `mark b/BOOKING_ID s/STATUS`<br> e.g., `mark b/2 s/COMPLETED`
-**Filter Bookings**| `filter p/PHONE_NUMBER`<br> e.g., `filter p/98765432`
+Action                | Format, Examples
+----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add Person**        | `padd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/IS_MEMBER] [t/TAG]…​` <br> e.g., `padd n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend`
+**Add Booking**       | `badd d/DATE_TIME p/PHONE x/PAX [r/REMARK]` <br> e.g., `badd d/2025-04-03 2:30 PM p/98765432 x/5 r/Birthday Celebration`
+**List Persons**      | `plist`
+**List Bookings**     | `blist`<br> `blist /all`
+**Edit Person**       | `pedit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [m/IS_MEMBER] [t/TAG]…​` <br> e.g.,`pedit 3 a/123 Sunset Way m/true t/friend t/vip`
+**Edit Booking**      | `bedit b/BOOKING_ID [d/DATETIME] [x/PAX] [r/REMARK]` <br> e.g., `bedit b/1 d/2025-04-01 9:00 PM x/4 r/Anniversary`
+**Delete Person**     | `pdelete INDEX` <br> e.g., `pdelete 3`
+**Delete Booking**    | `bdelete INDEX` <br> e.g., `bdelete 2`
+**Find Persons**      | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find James Jake`
+**Filter Bookings**   | `filter [p/PHONE_NUMBER] [d/DATE] [s/STATUS]` <br> e.g., `filter p/98765432`, `filter d/2023-12-25`, `filter s/COMPLETED`
+**Mark Booking**      | `mark b/BOOKING_ID s/STATUS` <br> e.g., `mark b/2 s/COMPLETED`
+**Today's Bookings**  | `today`
+**Clear All**         | `clearall`
+**Clear Bookings**    | `clearbookings`
+**Help**              | `help`
+**Exit**              | `exit`
