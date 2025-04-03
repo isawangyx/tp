@@ -254,8 +254,8 @@ _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
-
+The proposed data archiving feature is designed to allow users to archive old bookings, which can help in managing the address book more efficiently.
+_Implementation to be discussed for future revisions._
 
 --------------------------------------------------------------------------------------------------------------------
 
