@@ -192,7 +192,7 @@ public class Person {
             bookingIDsString = "No Bookings";
         }
 
-        String isMemberString = isMember ? "Member" : "Public";
+        String isMemberString = isMember ? "Yes" : "No";
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
