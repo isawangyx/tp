@@ -29,7 +29,7 @@
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
       <HBox spacing="0.5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
+        <Label fx:id="id" styleClass="cell_big_label" wrapText="true">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />
@@ -38,14 +38,16 @@
         <Label fx:id="name"
                text="\$first"
                styleClass="cell_big_label"
-               style="-fx-font-weight: bold;"/>
+               style="-fx-font-weight: bold;"
+               wrapText="true"/>
         <Label fx:id="memberLabel" styleClass="pink-tag" visible="false" />
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+      <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email"
-             style="-fx-padding: 0 5 0 0"/>
+             style="-fx-padding: 0 5 0 0"
+             wrapText="true"/>
       <VBox style="-fx-padding: 5 5 5 5;
                    -fx-background-color: #383838;
                    -fx-background-radius: 8;">
