@@ -98,8 +98,8 @@ class JsonAdaptedBooking {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Integer.class.getSimpleName()));
         }
-        if (pax < 1 || pax > 10000) {
-            throw new IllegalValueException(String.format("Pax should be a non-zero positive integer less than 10000",
+        if (pax < 1 || pax > 500) {
+            throw new IllegalValueException(String.format("Pax should be a non-zero positive integer less than 500",
                     Integer.class.getSimpleName()));
         }
         final int modelPax = pax;

@@ -32,6 +32,8 @@ public class ParserUtil {
     private static final DateTimeFormatter DATE_ONLY_FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
 
+    private static final int MAX_PERSONS = 500;
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -186,15 +188,14 @@ public class ParserUtil {
     public static int parsePax(String pax) throws ParseException {
         requireNonNull(pax);
         int parsedPax;
-        int MAX_PAX = 500;
-        String errorMessage = "Pax should be a positive integer between 1 and " + MAX_PAX
+        String errorMessage = "Pax should be a positive integer between 1 and " + MAX_PERSONS
                 + ". Please enter a valid number.";
         try {
             parsedPax = Integer.parseInt(pax);
         } catch (NumberFormatException e) {
             throw new ParseException(errorMessage);
         }
-        if (parsedPax < 1 || parsedPax > MAX_PAX) {
+        if (parsedPax < 1 || parsedPax > MAX_PERSONS) {
             throw new ParseException(errorMessage);
         }
         return parsedPax;

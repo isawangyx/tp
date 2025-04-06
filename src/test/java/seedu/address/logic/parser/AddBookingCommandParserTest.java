@@ -60,7 +60,7 @@ public class AddBookingCommandParserTest {
     @Test
     public void parse_invalidPax_failure() {
         String input = " d/2025-04-01 3:00 PM p/85355255 x/four r/Dinner";
-        assertParseFailure(parser, input, "Pax should be a positive integer between 1 and 20. "
+        assertParseFailure(parser, input, "Pax should be a positive integer between 1 and 500. "
                 + "Please enter a valid number.");
     }
 

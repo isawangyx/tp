@@ -60,7 +60,7 @@ public class JsonAdaptedBookingTest {
     public void toModelType_invalidPax_throwsIllegalValueException() {
         JsonAdaptedBooking booking =
                 new JsonAdaptedBooking(0, VALID_TIME, VALID_TIME, VALID_STATUS, VALID_REMARKS, INVALID_PAX);
-        String expectedMessage = "Pax should be a non-zero positive integer less than 10000";
+        String expectedMessage = "Pax should be a non-zero positive integer less than 500";
         assertThrows(IllegalValueException.class, expectedMessage, booking::toModelType);
     }
 
