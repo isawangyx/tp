@@ -186,13 +186,16 @@ public class ParserUtil {
     public static int parsePax(String pax) throws ParseException {
         requireNonNull(pax);
         int parsedPax;
+        int MAX_PAX = 500;
+        String errorMessage = "Pax should be a positive integer between 1 and " + MAX_PAX
+                + ". Please enter a valid number.";
         try {
             parsedPax = Integer.parseInt(pax);
         } catch (NumberFormatException e) {
-            throw new ParseException("Pax should be a positive integer between 1 and 20. Please enter a valid number.");
+            throw new ParseException(errorMessage);
         }
-        if (parsedPax < 1 || parsedPax > 20) {
-            throw new ParseException("Pax should be a positive integer between 1 and 20. Please enter a valid number.");
+        if (parsedPax < 1 || parsedPax > MAX_PAX) {
+            throw new ParseException(errorMessage);
         }
         return parsedPax;
     }
