@@ -122,6 +122,7 @@ Format: `padd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/IS_MEMBER] [t/TAG]…�
 <box type="tip" seamless>
 
 **Tips:**
+- A person's name must contain only alphanumeric characters.
 - A person's default membership status is false unless you set it to true.
 - A person can have any number of tags (including 0)
 
@@ -273,9 +274,9 @@ Examples:
 
 Deletes the specified booking from the bookings list.
 
-Format: `bdelete INDEX`
+Format: `bdelete BOOKING_ID`
 
-* Deletes the booking with the specified `INDEX`.
+* Deletes the booking with the specified `BOOKING_ID`.
 * The index refers to the unique booking ID of the booking.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -395,6 +396,20 @@ Format: `clearall`
 
 <br>
 
+## Clearing all completed and cancelled bookings : `clearbookings`
+
+Clear all bookings which have been marked as `COMPLETED` and `CANCELLED`.
+
+<box type="warning" seamless style="background-color: #FFCCCC; border-color: #FF0000;">
+
+**Warning:** All bookings that have been marked as `COMPLETED` and `CANCELLED` will be cleared. This action is irreversible!
+
+</box>
+
+Format: `clearbookings`
+
+<br>
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -459,16 +474,16 @@ _Details coming soon ..._
 Action                | Format, Examples
 ----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add Person**      | `padd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [m/IS_MEMBER] [t/TAG]…​` <br> e.g., `padd n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend`
-**Add Booking**       | `badd d/DATE_TIME p/PHONE x/PAX [r/REMARK]` <br> e.g., `badd d/2025-04-03 2:30 PM p/98765432 x/5 r/Birthday Celebration`
-**List Person**    | `plist`
-**List Bookings**     | `blist`<br> `blist /all`
 **Edit Person**     | `pedit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [m/IS_MEMBER] [t/TAG]…​` <br> e.g.,`pedit 3 a/123 Sunset Way m/true t/friend t/vip`
-**Edit Booking**      | `bedit b/BOOKING_ID [d/DATETIME] [x/PAX] [r/REMARK]` <br> e.g., `bedit b/1 d/2025-04-01 9:00 PM x/4 r/Anniversary`
 **Delete Person**   | `pdelete INDEX` <br> e.g., `pdelete 3`
-**Delete Booking**    | `bdelete INDEX` <br> e.g., `bdelete 2`
 **Find Person**    | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find James Jake`
-**Filter Bookings**   | `filter [p/PHONE_NUMBER] [d/DATE] [s/STATUS]` <br> e.g., `filter p/98765432`, `filter d/2023-12-25`, `filter s/COMPLETED`
+**List Person**    | `plist`
+**Add Booking**       | `badd d/DATE_TIME p/PHONE x/PAX [r/REMARK]` <br> e.g., `badd d/2025-04-03 2:30 PM p/98765432 x/5 r/Birthday Celebration`
+**Edit Booking**      | `bedit b/BOOKING_ID [d/DATETIME] [x/PAX] [r/REMARK]` <br> e.g., `bedit b/1 d/2025-04-01 9:00 PM x/4 r/Anniversary`
+**Delete Booking**    | `bdelete INDEX` <br> e.g., `bdelete 2`
 **Mark Booking**      | `mark b/BOOKING_ID s/STATUS` <br> e.g., `mark b/2 s/COMPLETED`
+**Filter Bookings**   | `filter [p/PHONE_NUMBER] [d/DATE] [s/STATUS]` <br> e.g., `filter p/98765432`, `filter d/2023-12-25`, `filter s/COMPLETED`
+**List Bookings**     | `blist`<br> `blist /all`
 **Today's Bookings**  | `today`
 **Clear All**         | `clearall`
 **Clear Bookings**    | `clearbookings`
