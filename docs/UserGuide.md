@@ -148,7 +148,7 @@ Format:
 - `INDEX` refers to the position of the person in the **last shown person list** (must be a positive integer).
 - At least one field must be provided.
 - You **cannot edit the phone number** of a person.
-- `IS_MEMBER` should be `true` or `false`.
+- `IS_MEMBER` should be `true`/`false`,`yes`/`no` or `1`/`0` (Case Insensitive).
 - Editing tags will replace all existing tags with the new set. To clear all tags, use `t/` without any value.
 
 </box>
