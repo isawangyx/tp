@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.Region?>
+
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       spacing="10"
@@ -39,8 +39,8 @@
         <Label fx:id="pax" style="-fx-text-fill: #CCCCCC;" text="Pax" />
         <Label fx:id="remarks" style="-fx-text-fill: #AAAAAA;" text="Remarks" />
 
-        <!-- Spacer pushes the bookingId to the right -->
-        <Region fx:id="spacer" HBox.hgrow="ALWAYS" />
+
+    </HBox>
 
         <!-- Right side: Booking ID -->
         <Label fx:id="bookingId"
@@ -51,7 +51,7 @@
                   -fx-background-color: #444444;
                   -fx-background-radius: 10;"
                text="ID" />
-    </HBox>
+
 
 </VBox>
 
