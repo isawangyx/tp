@@ -231,7 +231,8 @@ Format: `badd d/DATE_TIME p/PHONE x/PAX [r/REMARK]`
 **Tip:**
 - The phone number must belong to an existing patron.
 - Date and time must be in the format: `yyyy-MM-dd h:mm a`  
-  (e.g., `2025-04-03 2:30 PM`)
+  (e.g., `2025-04-03 2:30 PM`).
+- `PAX` refers to your dining group size, with a maximum of 500.
 - You can include an optional remark for the booking.
 
 </box>
