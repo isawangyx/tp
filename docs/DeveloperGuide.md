@@ -419,7 +419,7 @@ Use case ends.
     - 1a2. Use case resumes at step 1.
 - **1b.** No person found with the provided index.
     - 1b1. KrustyKrab shows error message.
-    - 1b2. Use case ends.
+    - 1b2. Use case resumes at step 1.
 - **1c.** Attempting to edit the phone number.
     - 1b1. KrustyKrab shows error message.
     - 1b2. Use case ends.
@@ -435,8 +435,8 @@ Use case ends.
 Use case ends.
 
 **Extensions**
-- **1a.** Invalid input (e.g., invalid person id).
-    - 1a1. KrustyKrab shows error message.
+- **1a.** The given index is invalid (out of range or non-positive integer).
+    - 1a1. KrustyKrab shows an error message.
     - 1a2. Use case resumes at step 1.
 
 ---
@@ -459,6 +459,14 @@ Use case ends.
 3. User scrolls through the displayed list to find the person they are looking for.
 
 Use case ends.
+
+**Extensions**
+- **1a.** Invalid input (e.g., no keywords).
+    - 1a1. KrustyKrab shows error message.
+    - 1a2. Use case resumes at step 1.
+- **1b.** No matches found for the search term.
+    - 1b1. KrustyKrab shows “0 persons listed!”
+    - 1b2. Use case ends.
 
 ---
 
@@ -553,9 +561,9 @@ Use case ends.
     - 1a1. KrustyKrab displays all bookings, including completed and cancelled ones.
     - 1a2. Use case ends.
 
-- **2a.** There are no bookings with status "UPCOMING".
-    - 2a1. KrustyKrab shows an error message.
-    - 2a2. Use case ends.
+- **1b.** There are no bookings with status "UPCOMING".
+    - 1b1. KrustyKrab displays: "There are no upcoming bookings."
+    - 1b2. Use case ends.
 
 ---
 
@@ -570,8 +578,11 @@ Use case ends.
 Use case ends.
 
 **Extensions**
+- **1a.** Invalid input (e.g., empty keyword, invalid phone number format, incorrect date format, invalid status).
+    - 1a1. KrustyKrab shows error message.
+    - 1a2. Use case resumes at step 1.
 - **2a.** No bookings match the filtering criteria.
-    - 2a1. KrustyKrab shows an error message.
+    - 2a1. KrustyKrab notifies the user that no bookings were found matching the filter.
     - 2a2. Use case ends.
 
 ---
