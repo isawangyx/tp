@@ -98,10 +98,12 @@ public class PersonCard extends UiPart<Region> {
 
                 Label dateTimeLabel = new Label(formatDateTime(booking.getBookingDateTime()));
                 dateTimeLabel.getStyleClass().add("yellow-tag");
+                dateTimeLabel.setMinWidth(Region.USE_PREF_SIZE);
                 bookingDetails.getChildren().add(dateTimeLabel);
 
                 Label paxLabel = new Label(booking.getPax() + " pax");
                 paxLabel.getStyleClass().add("purple-tag");
+                paxLabel.setMinWidth(Region.USE_PREF_SIZE);
                 bookingDetails.getChildren().add(paxLabel);
 
                 if (!booking.getRemarks().isEmpty()) {
