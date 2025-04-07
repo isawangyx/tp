@@ -99,7 +99,7 @@ class JsonAdaptedBooking {
                     Integer.class.getSimpleName()));
         }
         if (pax < 1 || pax > 500) {
-            throw new IllegalValueException(String.format("Pax should be a non-zero positive integer less than 500",
+            throw new IllegalValueException(String.format("Pax should be a non-zero positive integer less than 501",
                     Integer.class.getSimpleName()));
         }
         final int modelPax = pax;
