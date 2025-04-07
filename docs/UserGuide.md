@@ -334,12 +334,8 @@ Examples:
 Shows all bookings in the bookings list.
 
 Format:
-* `blist` : Lists upcoming bookings.
+* `blist` : Lists only upcoming bookings.
 * `blist /all` : Lists **all** bookings (including completed/cancelled).
-
-Examples:
-* `blist` → Lists only upcoming bookings.
-* `blist /all` → Lists all bookings.
 
 <br>
 
