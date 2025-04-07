@@ -26,7 +26,7 @@ public class AddBookingCommand extends Command {
 
     public static final String COMMAND_WORD = "badd";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a booking "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a booking to the booking list. "
             + "Parameters: "
             + PREFIX_DATE + "DATE "
             + PREFIX_PHONE + "PHONE "
