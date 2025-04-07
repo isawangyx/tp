@@ -60,8 +60,8 @@ public class EditBookingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Booking> lastShownList = model.getFilteredBookingList();
-        Booking bookingToEdit = lastShownList.stream()
+        List<Booking> bookingList = model.getAddressBook().getBookingList();
+        Booking bookingToEdit = bookingList.stream()
                 .filter(booking -> booking.getBookingId() == bookingId)
                 .findFirst()
                 .orElseThrow(() -> new CommandException(String.format(MESSAGE_BOOKING_NOT_FOUND, bookingId)));
