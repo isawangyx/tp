@@ -192,6 +192,7 @@ public class Person {
             bookingIDsString = "No Bookings";
         }
 
+        String isMemberString = isMember ? "Yes" : "No";
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
@@ -199,6 +200,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tagsString)
                 .add("bookingIDs", bookingIDsString)
+                .add("isMember", isMemberString)
                 .toString();
     }
 }
