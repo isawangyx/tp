@@ -50,7 +50,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `pdelete 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -90,9 +90,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("pdelete 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `pdelete 1` Command" />
 
 <box type="info" seamless>
 
@@ -154,7 +154,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation to Track Bookings
 
-The `Booking` class is a class under the Model component. It is used to represent a booking made by a customer. The class contains the following fields:
+The `Booking` class is a class under the Model component. It is used to represent a booking made by a person. The class contains the following fields:
 * `bookingId` - a unique identifier for the booking.
 * `bookingPerson` - the person who made the booking.
 * `bookingDateTime` - the date and time of the booking.
@@ -163,10 +163,10 @@ The `Booking` class is a class under the Model component. It is used to represen
 * `pax` - the number of people for the booking.
 * `remark` - any remarks made by the customer.
 
-Patrons and bookings have a one-to-many relationship, where a patron can have multiple bookings. 
+Persons and bookings have a one-to-many relationship, where a person can have multiple bookings. 
 As such:
-- The `Booking` class contains a reference to the `Person` class, which represents the patron who made the booking. 
-- Patrons have a `bookingIds` field that contains a list of booking IDs linked to the booking's `bookingId` field, which are unique identifiers for each booking made by the patron.
+- The `Booking` class contains a reference to the `Person` class, which represents the person who made the booking. 
+- Persons have a `bookingIds` field that contains a list of booking IDs linked to the booking's `bookingId` field, which are unique identifiers for each booking made by the person.
 
 Bookings are stored in the `UniqueBookingList` class, which is a list of unique bookings utilising a HashSet for quick retrieval of `Booking` Objects by `BookingId`, and it ensures that no two bookings with the same booking ID exist in the list.
 The `UniqueBookingList` class provides methods to add, delete, and search for bookings. It also provides methods to filter bookings by date and time, and to sort bookings by date and time, all separate from the list of persons represented by `UniquePersonsList`.
@@ -179,12 +179,12 @@ The `UniqueBookingList` class provides methods to add, delete, and search for bo
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
-**Aspect: Linking bookings to patron:**
+**Aspect: Linking bookings to person:**
 
 * **Utilising list of integers for Ids:** Easier to store in memory.
     * Pros: `Person` class occupies less space in memory.
             Easier to save to JSON file.
-    * Cons: More steps required to access bookings under a given patron.
+    * Cons: More steps required to access bookings under a given person.
 
 
 ### Storage of Persons and Bookings
@@ -208,14 +208,14 @@ Given below is a class diagram of the `Storage` component:
 
 **Aspect: Storing list of bookings:**
 
-* **New field for Array of Bookings:** Easier to understand and debug.
+* **New field for array of Bookings:** Easier to understand and debug.
     * Pros: JSON format is simple and intuitive.
     * Cons: Requires inputs in fields to be correct.
 
-**Aspect: Linking bookings to patron:**
+**Aspect: Linking bookings to person:**
 
-* **Utilising list of integers for Ids:** Less space to store in the JSON file.
-    * Pros: Ensures every `Booking` object is tied to a `Person` object.
+* **Utilising list of integers for Booking IDs:** Less space to store in the JSON file.
+    * Pros: Ensures every `Booking` object is tied to a `Person` object by its ID.
     * Cons: Fails to load JSON file if incorrectly set up.
 
 
@@ -237,11 +237,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `pdelete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `padd` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -307,7 +307,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `pdelete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -336,17 +336,17 @@ _Implementation to be discussed for future revisions._
 **Target user profile**:
 
 * Restaurant staff with a significant number of bookings
-* needs to efficiently manage patron bookings, including status, timing, contact details, and past records
-* wants to personalize services by recognizing regular patrons
+* needs to efficiently manage customer bookings, including status, timing, contact details, and past records
+* wants to personalize services by recognizing regular customers
 * prefers desktop apps for quick searching and retrieval of booking details
 * can type fast
 * is reasonably comfortable using CLI apps
 
 **Value proposition**: 
 
-* Manage patrons' information and bookings faster than a typical mouse/GUI driven app
-* Accommodate patrons who need to reschedule, making for a flexible booking tool
-* Track patrons' visit history and preferences for personalized services
+* Manage customers' information and bookings faster than a typical mouse/GUI driven app
+* Accommodate customers who need to reschedule, making for a flexible booking tool
+* Track customers' visit history and preferences for personalized services
 * Summarise daily bookings to streamline shift preparation and optimize resource allocation
 
 
@@ -356,40 +356,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​         | I want to …​                                                 | So that I can…​                                            |
 |----------|----------------|--------------------------------------------------------------|------------------------------------------------------------|
-| `* * *`  | restaurant staff  | add a new booking with patron details                      | keep track of upcoming reservations                        |
+| `* * *`  | restaurant staff  | add a new booking with customer details                      | keep track of upcoming reservations                        |
 | `* * *`  | restaurant staff  | delete a booking                                             | remove cancellations or incorrect entries                  |
 | `* * *`  | restaurant staff  | view a list of all upcoming bookings                         | quickly see my schedule                                    |
-| `* * *`  | restaurant staff  | mark a booking as completed                                  | keep track of which patrons have visited                 |
-| `* * *`  | restaurant staff  | add notes to a patron profile                              | remember preferences like seating choices, allergies, etc. |
-| `* * *`  | restaurant staff  | search for a booking using a patron’s name or phone number | quickly find their reservation details                     |
-| `* * *`  | restaurant staff  | save a new patron’s contact information                    | quickly find their details for future bookings             |
-| `* * *`  | restaurant staff  | edit a patron’s contact details                            | update incorrect or outdated information                   |
-| `* * *`  | restaurant staff  | delete patron contact details                              | maintain an updated list                                   |
+| `* * *`  | restaurant staff  | mark a booking as completed                                  | keep track of which customers have visited                 |
+| `* * *`  | restaurant staff  | add notes to a customer profile                              | remember preferences like seating choices, allergies, etc. |
+| `* * *`  | restaurant staff  | search for a booking using a customer’s name or phone number | quickly find their reservation details                     |
+| `* * *`  | restaurant staff  | save a new customer’s contact information                    | quickly find their details for future bookings             |
+| `* * *`  | restaurant staff  | edit a customer’s contact details                            | update incorrect or outdated information                   |
+| `* * *`  | restaurant staff  | delete customer's contact details                            | maintain an updated list                                   |
 | `* * *`  | restaurant staff  | store data offline                                           | keep all information for future use and tracking           |
 | `* * *`  | restaurant staff  | view all upcoming bookings                                   | prepare for each day                                       |
 | `* *`    | restaurant staff  | delete all completed bookings                                | clear unnecessary backlogs                                 |
-| `* *`    | restaurant staff  | edit an existing booking                                     | update details when a patron changes their reservation   |
+| `* *`    | restaurant staff  | edit an existing booking                                     | update details when a customer changes their reservation   |
 | `* *`    | restaurant staff  | sort bookings by date or time                                | find what I need quickly                                   |
 | `* *`    | restaurant staff  | filter bookings by date                                      | see only the relevant reservations                         |
-| `* * `   | restaurant staff  | view a patron’s past booking history                       | provide a more personalized experience                     |
+| `* * `   | restaurant staff  | view a customer’s past booking history                       | provide a more personalized experience                     |
 | `* *`    | restaurant staff  | view a summary of today’s bookings on the homepage           | see important details at a glance                          |
-| `* *`    | restaurant staff  | receive notifications for same-day bookings                  | prepare for upcoming visitors                              |
-| `* *`    | restaurant staff  | automatically set reminders for upcoming bookings            | avoid forgetting patron reservations                     |
-| `* *`    | restaurant staff  | see the frequency of a patron’s visits                     | recognize regular patrons                                |
-| `* *`    | restaurant staff  | tag VIP or frequent patrons                                | provide them with special perks or greetings               |
-| `* *`    | restaurant staff  | save member emails for follow-up emails                      | send reservation reminders and encourage repeat visits     |
-| `* *`    | restaurant staff  | flag patrons with repeated no-shows                        | manage bookings more effectively                           |
-| `* *`    | restaurant staff  | see an overview of all bookings for the week/month           | better manage the workload                                 |
-| `* *`    | restaurant staff  | print a list of bookings                                     | have a hard copy for reference                             |
-| `* * `   | restaurant staff  | see the number of bookings for each day                      | know how busy it will be                                   |
-| `*`      | restaurant staff  | validate member emails                                       | ensure they are in the correct input format                |
-| `*`      | restaurant staff  | quickly duplicate a previous booking                         | save time for repeat patrons                             |
-| `*`      | restaurant staff  | view booking trends (e.g., peak hours, popular days)         | prepare for busy periods                                   |
-| `*`      | restaurant staff  | assign specific bookings to different team members           | coordinate who is handling each patron                   |
+| `* *`    | restaurant staff  | tag members                                                  | provide them with special perks or greetings               |
+| `*`      | restaurant staff  | validate emails                                              | ensure they are in the correct input format                |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `KrustyKrab` and the **Actor** is the `user`, unless specified otherwise)
 
 ---
 
@@ -397,20 +386,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to add a new person by entering their details (name, phone, email, address, membership status and optional tags).
-2. System validates the input.
-3. System saves the new person to the address book.
-4. System displays a confirmation message:  
+2. KrustyKrab validates the input.
+3. KrustyKrab saves the new person to the address book.
+4. KrustyKrab displays a confirmation message:  
    *"New person added: [person details]"*
 
 Use case ends.
 
 **Extensions**
 - **1a.** Invalid input (e.g., empty name, invalid email format, invalid phone number).
-    - 1a1. System shows error message.
+    - 1a1. KrustyKrab shows error message.
     - 1a2. Use case resumes at step 1.
 
 - **1b.** Person with the same phone number already exists.
-    - 1b1. System alerts the user that the person already exists.
+    - 1b1. KrustyKrab alerts the user that the person already exists.
     - 1b2. Use case ends.
 
 ---
@@ -419,20 +408,20 @@ Use case ends.
 
 **MSS**
 1. User requests to edit an existing person by specifying their index and providing new details (name, email, address, membership status, and optional tags).
-2. System validates the input (ensuring no empty fields, valid email format).
-3. System saves the new person to the address book and notifies the user.
+2. KrustyKrab validates the input (ensuring no empty fields, valid email format).
+3. KrustyKrab saves the new person to the address book and notifies the user.
 
 Use case ends.
 
 **Extensions**
 - **1a.** Invalid input (e.g., empty name, invalid email format).
-    - 1a1. System shows error message.
+    - 1a1. KrustyKrab shows error message.
     - 1a2. Use case resumes at step 1.
 - **1b.** No person found with the provided index.
-    - 1b1. System shows error message.
+    - 1b1. KrustyKrab shows error message.
     - 1b2. Use case ends.
 - **1c.** Attempting to edit the phone number.
-    - 1b1. System shows error message.
+    - 1b1. KrustyKrab shows error message.
     - 1b2. Use case ends.
 
 ---
@@ -441,13 +430,13 @@ Use case ends.
 
 **MSS**
 1. User requests to delete a person.
-2. System deletes the person from the list and notifies the user.
+2. KrustyKrab deletes the person from the list and notifies the user.
 
 Use case ends.
 
 **Extensions**
 - **1a.** Invalid input (e.g., invalid person id).
-    - 1a1. System shows error message.
+    - 1a1. KrustyKrab shows error message.
     - 1a2. Use case resumes at step 1.
 
 ---
@@ -456,7 +445,7 @@ Use case ends.
 
 **MSS**
 1. User requests to view a list of all persons.
-2. System displays the list of persons to the user.
+2. KrustyKrab displays the list of persons to the user.
 
 Use case ends.
 
@@ -466,7 +455,7 @@ Use case ends.
 
 **MSS**
 1. User requests to find a person, providing one or more search keywords.
-2. System displays the students that fit the search term.
+2. KrustyKrab displays the students that fit the search term.
 3. User scrolls through the displayed list to find the person they are looking for.
 
 Use case ends.
@@ -477,24 +466,24 @@ Use case ends.
 
 **MSS**
 1. User requests to add a new booking by providing phone number, date/time, pax and optional remark.
-2. System checks if a person with the given phone number exists.
-    - If **no**, system shows: *"No person with the given phone number exists."*  
+2. KrustyKrab checks if a person with the given phone number exists.
+    - If **no**, KrustyKrab shows: *"No person with the given phone number exists."*  
       Use case ends.
     - If **yes**, continue to step 3.
-3. System validates the booking inputs.
-4. System saves the booking under the person’s record.
-5. System displays confirmation:  
+3. KrustyKrab validates the booking inputs.
+4. KrustyKrab saves the booking under the person’s record.
+5. KrustyKrab displays confirmation:  
    *"New booking added: [booking details]"*
 
 Use case ends.
 
 **Extensions**
 - **2a.** Person not found.
-    - 2a1. System displays error.
+    - 2a1. KrustyKrab displays error.
     - 2a2. Use case ends.
 
 - **3a.** Invalid booking data (e.g., negative pax, wrong date format).
-    - 3a1. System shows relevant error message.
+    - 3a1. KrustyKrab shows relevant error message.
     - 3a2. Use case resumes at step 1.
 
 ---
@@ -503,17 +492,17 @@ Use case ends.
 
 **MSS**
 1. User requests to edit an existing booking by specifying their index and providing new details.
-2. System validates the input.
-3. System saves the new booking to the address book and notifies the user.
+2. KrustyKrab validates the input.
+3. KrustyKrab saves the new booking to the address book and notifies the user.
 
 Use case ends.
 
 **Extensions**
 - **1a.** Invalid input (e.g., empty booking id, negative pax, wrong date format)
-    - 1a1. System shows error message.
+    - 1a1. KrustyKrab shows error message.
     - 1a2. Use case resumes at step 1.
 - **1b.** No booking found with the provided index.
-    - 1b1. System shows error message.
+    - 1b1. KrustyKrab shows error message.
     - 1b2. Use case ends.
 
 
@@ -523,14 +512,14 @@ Use case ends.
 
 **MSS**
 1. User requests to delete a booking by specifying their index.
-2. System deletes the booking.
-3. System displays a confirmation message.
+2. KrustyKrab deletes the booking.
+3. KrustyKrab displays a confirmation message.
 
 Use case ends.
 
 **Extensions**
 - **1a.** The given index is invalid (out of range or non-positive integer).
-    - 1a1. System shows an error message.
+    - 1a1. KrustyKrab shows an error message.
     - 1a2. Use case resumes at step 1.
 
 ---
@@ -539,14 +528,14 @@ Use case ends.
 
 **MSS**
 1. User requests to mark a specific booking as upcoming, completed or cancelled with index.
-2. System marks the booking with the specified status.
-3. System displays a confirmation message.
+2. KrustyKrab marks the booking with the specified status.
+3. KrustyKrab displays a confirmation message.
 
 Use case ends.
 
 **Extensions**
 - **1a.** The given index is invalid (out of range or non-positive integer).
-    - 1a1. System shows an error message.
+    - 1a1. KrustyKrab shows an error message.
     - 1a2. Use case resumes at step 1.
 
 ---
@@ -555,17 +544,17 @@ Use case ends.
 
 **MSS**
 1. User requests to view a list of all bookings with status "UPCOMING".
-2. System displays a list of bookings with status "UPCOMING".
+2. KrustyKrab displays a list of bookings with status "UPCOMING".
 
 Use case ends.
 
 **Extensions**
 - **1a.** User provides the `/all` flag.
-    - 1a1. System displays all bookings, including completed and cancelled ones.
+    - 1a1. KrustyKrab displays all bookings, including completed and cancelled ones.
     - 1a2. Use case ends.
 
 - **2a.** There are no bookings with status "UPCOMING".
-    - 2a1. System shows an error message.
+    - 2a1. KrustyKrab shows an error message.
     - 2a2. Use case ends.
 
 ---
@@ -574,15 +563,15 @@ Use case ends.
 
 **MSS**
 1. User requests to filter bookings by providing a phone number, booking date or booking status.
-2. System applies the filtering criteria (phone number and/or booking date and/or booking status).
-3. System retrieves all bookings associated with the filter.
-4. System displays the filtered list of bookings.
+2. KrustyKrab applies the filtering criteria (phone number and/or booking date and/or booking status).
+3. KrustyKrab retrieves all bookings associated with the filter.
+4. KrustyKrab displays the filtered list of bookings.
 
 Use case ends.
 
 **Extensions**
 - **2a.** No bookings match the filtering criteria.
-    - 2a1. System shows an error message.
+    - 2a1. KrustyKrab shows an error message.
     - 2a2. Use case ends.
 
 ---
@@ -591,8 +580,8 @@ Use case ends.
 
 **MSS**
 1. User requests to clear all completed and cancelled bookings.
-2. System deletes all bookings that are marked as completed or cancelled.
-3. System displays a confirmation message.
+2. KrustyKrab deletes all bookings that are marked as completed or cancelled.
+3. KrustyKrab displays a confirmation message.
 
 Use case ends.
 
@@ -602,8 +591,8 @@ Use case ends.
 
 **MSS**
 1. User requests to clear the entire database (persons list and bookings list).
-2. System clears the database. 
-3. System displays a confirmation message.
+2. KrustyKrab clears the database. 
+3. KrustyKrab displays a confirmation message.
 
 Use case ends.
 
@@ -613,7 +602,7 @@ Use case ends.
 
 **MSS**
 1. User requests to exit the application.
-2. System displays a confirmation message and closes the application.
+2. KrustyKrab displays a confirmation message and closes the application.
 
 Use case ends.
 
@@ -625,7 +614,7 @@ Use case ends.
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  A user with above average typing speed for regular English text (i.e. not code, not KrustyKrab admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The codebase should be easily extendable without major changes to the UML of the application.
 5.  Any command execution should be completed within a second of user input.
 
@@ -644,8 +633,30 @@ Use case ends.
 ## **Appendix: Planned Enhancements**
 
 1. **Enhance Booking Conflict Detection**: Implement a feature to ensure that upcoming bookings are not overlapped with each other, considering factors like booking type, duration, and person availability. This will prevent double-booking and improve user experience by making sure only valid booking slots are available. 
-2. **Add Notification System for Upcoming Bookings**: Introduce a notification system to alert users of their upcoming bookings. This enhancement will include customizable notification preferences, allowing users to choose when they want to be reminded (e.g., 24 hours before, 1 hour before, etc.).
+2. **Add Notification KrustyKrab for Upcoming Bookings**: Introduce a notification KrustyKrab to alert users of their upcoming bookings. This enhancement will include customizable notification preferences, allowing users to choose when they want to be reminded (e.g., 24 hours before, 1 hour before, etc.).
 3. **Improve Reporting Capabilities**: Expand the reporting features to allow users to generate detailed reports of booking history, including the number of bookings made, booking frequency, and utilization rates. This will help users track booking patterns and identify potential areas for optimization.
+
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
+
+**Team size:**: 5
+**Difficulty level:**
+Our project was significantly more complex compared to AB3. We introduced various new commands to support additional functionalities. The `Person` objects now include more fields, with certain fields ('BookingIds') requiring syncing to the `Booking` objects. The UI has also become more complicated, with the introduction of two split panes that reflect `Person` and `Booking` data simultaneously. 
+
+**Challenges faced:**
+1. Complexity of Features:
+   Implementing features such as Person and Booking management required a deep understanding of the existing codebase and careful planning to ensure seamless integration of various functionalities like  filtering, adding, editing, and syncing Bookings with Persons.
+2. User Interface:
+   Ensuring the UI remains intuitive while accommodating new features was challenging.
+
+**Effort required:**
+1. Planning and Design: 20 hours were spent on planning and designing the Person and Booking features and their integration with the existing system.
+2. Implementation: 85 hours were dedicated to coding, debugging, and refining the new features for managing Person and Booking entities. 
+3. Testing: 35 hours were spent on writing and executing test cases to ensure the reliability of the new features.
+4. Documentation: 10 hours were used to update the Developer Guide and User Guide to reflect the new features and changes.
+
+**Achievements:**
+We have extended AB3 with multiple new features and a better UI, to make the app more specialised and suitable for restaurant staff.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Instructions for manual testing**
@@ -680,13 +691,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `plist` command. Multiple persons in the list.
 
-   2. Test case: `delete 1`<br>
+   2. Test case: `pdelete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   3. Test case: `delete 0`<br>
+   3. Test case: `pdelete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `pdelete`, `pdelete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
