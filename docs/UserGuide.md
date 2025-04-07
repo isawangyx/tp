@@ -231,7 +231,8 @@ Format: `badd d/DATE_TIME p/PHONE x/PAX [r/REMARK]`
 **Tip:**
 - The phone number must belong to an existing patron.
 - Date and time must be in the format: `yyyy-MM-dd h:mm a`  
-  (e.g., `2025-04-03 2:30 PM`)
+  (e.g., `2025-04-03 2:30 PM`).
+- `PAX` refers to your dining group size, with a maximum of 500.
 - You can include an optional remark for the booking.
 
 </box>
@@ -292,6 +293,7 @@ Format:
 
 * The `BOOKING_ID` is shown when you list bookings.
 * Status must be exactly one of: `UPCOMING`, `COMPLETED`, `CANCELLED`.
+* Status is case-insensitive (e.g., upcoming and Completed are valid).
 
 Example:
 * `mark b/2 s/COMPLETED`
@@ -333,12 +335,8 @@ Examples:
 Shows all bookings in the bookings list.
 
 Format:
-* `blist` : Lists upcoming bookings.
+* `blist` : Lists only upcoming bookings.
 * `blist /all` : Lists **all** bookings (including completed/cancelled).
-
-Examples:
-* `blist` → Lists only upcoming bookings.
-* `blist /all` → Lists all bookings.
 
 <br>
 
@@ -387,7 +385,7 @@ Listed below are the currently supported general commands.
 
 Clears all patron entries and booking entries.
 
-<box type="warning" seamless>
+<box type="warning" seamless style="background-color: #FFCCCC; border-color: #FF0000;">
 
 **Warning:** All patrons and bookings will be cleared. This action is irreversible!
 
