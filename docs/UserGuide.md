@@ -292,6 +292,7 @@ Format:
 
 * The `BOOKING_ID` is shown when you list bookings.
 * Status must be exactly one of: `UPCOMING`, `COMPLETED`, `CANCELLED`.
+* Status is case-insensitive (e.g., upcoming and Completed are valid).
 
 Example:
 * `mark b/2 s/COMPLETED`
