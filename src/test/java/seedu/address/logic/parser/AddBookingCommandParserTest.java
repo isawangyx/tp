@@ -53,8 +53,8 @@ public class AddBookingCommandParserTest {
     public void parse_invalidDateTimeFormat_failure() {
         String input = " d/April 1st 6pm p/85355255 x/4 r/Dinner";
         assertParseFailure(parser, input, "Invalid date format: April 1st 6pm\n"
-                + " Please follow the format: yyyy-MM-dd h:mm a\n"
-                + " Example: 2020-03-03 2:00 PM");
+                + "Please follow the format: yyyy-MM-dd h:mm a\n"
+                + "Example: 2020-03-03 2:00 PM");
     }
 
     @Test

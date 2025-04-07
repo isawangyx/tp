@@ -155,8 +155,8 @@ public class ParserUtil {
 
         } catch (DateTimeParseException e) {
             throw new ParseException("Invalid date format: " + dateStr
-                    + "\n Please follow the format: " + DATE_TIME_FORMAT
-                    + "\n Example: 2020-03-03 2:00 PM");
+                    + "\nPlease follow the format: " + DATE_TIME_FORMAT
+                    + "\nExample: 2020-03-03 2:00 PM");
         }
     }
 
@@ -175,8 +175,8 @@ public class ParserUtil {
             return date.atStartOfDay();
         } catch (DateTimeParseException e) {
             throw new ParseException("Invalid date format: " + dateStr
-                    + "\n Please follow the format: yyyy-MM-dd"
-                    + "\n Example: 2023-12-25");
+                    + "\nPlease follow the format: yyyy-MM-dd"
+                    + "\nExample: 2023-12-25");
         }
     }
 
