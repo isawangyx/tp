@@ -281,6 +281,7 @@ public class EditPersonCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("isMember", isMember)
                     .toString();
         }
     }
