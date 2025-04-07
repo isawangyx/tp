@@ -41,7 +41,7 @@ KrustyKrab is optimized for use via keyboard commands while still being visually
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar krustykrab.jar` command to run the application.  
 **Example**: `cd C:\Users\JasonLim\KrustyHomeFolder\`<br><br>
 A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-![Ui](images/Ui.png)
+![Ui](images/StartingUI.png)
 
 5. Type a command in the command box and press _Enter_ to execute it.  
 **Example:** Typing **`help`** and pressing _Enter_ will open the help window.
