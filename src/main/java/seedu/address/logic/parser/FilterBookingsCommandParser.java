@@ -37,6 +37,8 @@ public class FilterBookingsCommandParser implements Parser<FilterBookingsCommand
                     FilterBookingsCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_DATE, PREFIX_STATUS);
+
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             try {
                 phoneNumber = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
