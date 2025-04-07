@@ -385,7 +385,7 @@ Listed below are the currently supported general commands.
 
 Clears all patron entries and booking entries.
 
-<box type="warning" seamless>
+<box type="warning" seamless style="background-color: #FFCCCC; border-color: #FF0000;">
 
 **Warning:** All patrons and bookings will be cleared. This action is irreversible!
 
