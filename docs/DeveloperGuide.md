@@ -576,6 +576,22 @@ Use case ends.
 
 ---
 
+### **Use case: Summarise bookings of the day **
+
+**MSS**
+1. User requests to show all bookings for today along with a summary count of today's upcoming, completed and cancelled bookings.
+2. KrustyKrab displays  
+- A list of all bookings for the current date.
+- A summary count of each booking status.
+
+Use case ends.
+
+**Extensions**
+- **1a.** No bookings found for today.
+    - 1a1. KrustyKrab shows a message: "There are no bookings today."
+    - 1a2. Use case ends.
+---
+
 ### **Use case: Clear completed and cancelled bookings**
 
 **MSS**
