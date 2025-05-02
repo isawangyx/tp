@@ -669,21 +669,33 @@ Use case ends.
 
 **Team size:** 5
 
+//@@author isawangyx-reused
+//Reused from https://ay2425s1-cs2103t-t08-2.github.io/tp/DeveloperGuide.html
+// with minor modifications
 **Difficulty level:**
 Our project was significantly more complex compared to AB3. We introduced various new commands to support additional functionalities. The `Person` objects now include more fields, with certain fields ('BookingIds') requiring syncing to the `Booking` objects. The UI has also become more complicated, with the introduction of two split panes that reflect `Person` and `Booking` data simultaneously. 
 
+//@@author isawangyx-reused
+//Reused from https://ay2425s2-cs2103t-t13-4.github.io/tp/DeveloperGuide.html 
+// with minor modifications to relate to our app
 **Challenges faced:**
 1. Complexity of Features:
    Implementing features such as Person and Booking management required a deep understanding of the existing codebase and careful planning to ensure seamless integration of various functionalities like  filtering, adding, editing, and syncing Bookings with Persons.
 2. User Interface:
    Ensuring the UI remains intuitive while accommodating new features was challenging.
 
+//@@author isawangyx-reused
+//Reused from https://ay2425s2-cs2103t-t13-4.github.io/tp/DeveloperGuide.html
+// with minor modifications to the specific hours spent
 **Effort required:**
 1. Planning and Design: 20 hours were spent on planning and designing the Person and Booking features and their integration with the existing system.
 2. Implementation: 85 hours were dedicated to coding, debugging, and refining the new features for managing Person and Booking entities. 
 3. Testing: 35 hours were spent on writing and executing test cases to ensure the reliability of the new features.
 4. Documentation: 10 hours were used to update the Developer Guide and User Guide to reflect the new features and changes.
 
+//@@author isawangyx-reused
+//Reused from https://ay2425s1-cs2103t-t08-2.github.io/tp/DeveloperGuide.html
+// with minor modifications
 **Achievements:**
 We have extended AB3 with multiple new features and a better UI, to make the app more specialised and suitable for restaurant staff.
 
